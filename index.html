@@ -6,7 +6,7 @@
 <title>Anna · 60 ans</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Italiana&family=Parisienne&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Italiana&family=Italianno&family=Parisienne&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --cream: #f4ecdb;
@@ -20,6 +20,9 @@
     --gold-deep: #8a6a30;
     --gold-light: #d4a755;
     --rose: #c08a85;
+    --terracotta: #b8553a;
+    --terracotta-deep: #8b3a23;
+    --olive: #6f7340;
     --shadow: rgba(43, 36, 28, 0.15);
   }
 
@@ -175,70 +178,323 @@
   }
 
   /* ============================================================
-     COVER PAGE
+     COVER — Florentine modern. Flowing animated SVG lines,
+     terracotta + ink, big editorial 60.
      ============================================================ */
   .cover .paper {
-    text-align: center;
+    text-align: left;
     background:
-      radial-gradient(ellipse at top, #fbf6ec 0%, #ecdec1 100%);
-    padding: clamp(36px, 5vw, 70px);
+      radial-gradient(ellipse at 70% 0%, #f4e8cf 0%, transparent 50%),
+      radial-gradient(ellipse at 0% 100%, rgba(184, 85, 58, 0.08) 0%, transparent 40%),
+      var(--paper);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: min(720px, 88vh);
+  }
+
+  /* the flowing SVG canvas sits behind everything */
+  .cover-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .cover-svg path,
+  .cover-svg circle,
+  .cover-svg line {
+    fill: none;
+    stroke: var(--terracotta, #b8553a);
+    stroke-width: 1.2;
+    vector-effect: non-scaling-stroke;
+    stroke-linecap: round;
+  }
+  .cover-svg .ink-line {
+    stroke: var(--ink, #2b241c);
+    stroke-width: 0.8;
+    opacity: 0.5;
+  }
+  .cover-svg .gold-line {
+    stroke: #b08a4a;
+    stroke-width: 0.6;
+    opacity: 0.7;
+  }
+
+  /* draw-on animation for stroked paths */
+  .draw-on {
+    stroke-dasharray: var(--len, 1000);
+    stroke-dashoffset: var(--len, 1000);
+    animation: draw-stroke var(--dur, 2.4s) cubic-bezier(0.65, 0, 0.35, 1) var(--d, 0s) forwards;
+  }
+  @keyframes draw-stroke {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* slow continuous drift for the underlay path */
+  .cover-svg-drift {
+    stroke: var(--terracotta);
+    stroke-width: 0.8;
+    fill: none;
+    animation: drift 12s ease-in-out infinite alternate;
+    opacity: 0;
+    animation-delay: 4s;
+  }
+  @keyframes drift {
+    0% { transform: translate(0, 0); opacity: 0.15; }
+    50% { transform: translate(-20px, 8px); opacity: 0.25; }
+    100% { transform: translate(20px, -8px); opacity: 0.15; }
+  }
+
+  /* once initial draw is done, slowly breathe the lines */
+  .cover.active .cover-svg path:not(.cover-svg-drift) {
+    animation: cover-breathe 8s ease-in-out 5s infinite;
+  }
+  @keyframes cover-breathe {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* a vertical column on the left edge */
+  .cover-rail {
+    position: absolute;
+    top: 50%;
+    left: 28px;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: left top;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--terracotta, #b8553a);
+    z-index: 3;
+    white-space: nowrap;
+    opacity: 0;
+    animation: rail-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+  }
+  @keyframes rail-in {
+    0% { opacity: 0; transform: translateY(-50%) rotate(-90deg) translateX(-12px); }
+    100% { opacity: 1; transform: translateY(-50%) rotate(-90deg) translateX(0); }
+  }
+
+  /* page index in top right — like a book chapter */
+  .cover-index {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    z-index: 3;
+    opacity: 0;
+    animation: rail-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+  }
+
+  /* main content column */
+  .cover-content {
+    position: relative;
+    z-index: 2;
+    padding: clamp(60px, 9vw, 110px) clamp(50px, 8vw, 100px) clamp(40px, 6vw, 70px);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 3vw, 32px);
+    align-content: center;
   }
 
   .cover-eyebrow {
     font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    letter-spacing: 6px;
+    font-size: 10px;
+    letter-spacing: 8px;
     text-transform: uppercase;
-    color: var(--gold-deep);
-    margin-bottom: 16px;
+    color: var(--terracotta, #b8553a);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
+  .cover-eyebrow::before,
+  .cover-eyebrow::after {
+    content: '';
+    height: 1px;
+    background: var(--terracotta, #b8553a);
+    flex: 0 0 24px;
+    opacity: 0.7;
+  }
+  .cover-eyebrow::after { flex: 1 1 100%; }
 
+  /* "pour Anna" in italic serif — large, editorial */
   .cover-title {
-    font-family: 'Parisienne', cursive;
-    font-size: clamp(40px, 7vw, 88px);
-    font-weight: 400;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(34px, 4.6vw, 56px);
+    line-height: 1.05;
     color: var(--ink);
-    line-height: 1;
-    margin: 6px 0;
+    margin: 0;
+    max-width: 600px;
   }
 
+  /* gigantic 60 — terracotta, anchored bottom-left, optical hang */
+  .cover-sixty-wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(20px, 4vw, 50px);
+    margin-top: clamp(10px, 2vw, 24px);
+  }
   .cover-sixty {
-    font-family: 'Italiana', serif;
-    font-size: clamp(96px, 18vw, 200px);
-    line-height: 0.9;
-    letter-spacing: -8px;
-    margin: 16px 0;
-    background: linear-gradient(135deg, #d4a755 0%, #b08a4a 40%, #8a6a30 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 4px 20px rgba(176,138,74,0.15);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(220px, 36vw, 420px);
+    line-height: 0.78;
+    letter-spacing: -16px;
+    color: var(--terracotta, #b8553a);
+    margin: 0;
+    margin-left: -8px;
+  }
+
+  /* tilted scrapbook polaroid — photo of Anna as a child */
+  .cover-polaroid {
+    position: relative;
+    background: #fff;
+    padding: 14px 14px 50px;
+    box-shadow:
+      0 4px 14px rgba(43, 36, 28, 0.18),
+      0 24px 60px rgba(43, 36, 28, 0.18);
+    transform: rotate(4deg);
+    margin-bottom: clamp(20px, 4vw, 40px);
+    margin-left: auto;
+    align-self: flex-end;
+    flex-shrink: 0;
+    width: clamp(220px, 28vw, 340px);
+    transition: transform 0.4s ease;
+  }
+  .cover-polaroid:hover {
+    transform: rotate(0deg) scale(1.03);
+  }
+  .cover-polaroid img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    filter: sepia(0.08) saturate(0.95);
+  }
+  .cover-polaroid-caption {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.2;
+  }
+  .cover-polaroid-caption small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 2px;
+  }
+
+  /* a piece of "washi tape" attaching the polaroid */
+  .cover-polaroid::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 30%;
+    width: 50px;
+    height: 18px;
+    background: rgba(184, 85, 58, 0.25);
+    transform: rotate(-8deg);
+    box-shadow: 0 2px 4px rgba(43, 36, 28, 0.08);
+  }
+  .cover-polaroid::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 12%;
+    width: 40px;
+    height: 14px;
+    background: rgba(184, 85, 58, 0.18);
+    transform: rotate(12deg);
+  }
+
+  /* bottom row: name + subtitle + date split horizontally */
+  .cover-footer {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: clamp(16px, 3vw, 40px);
+    align-items: end;
+    padding-top: 24px;
+    border-top: 1px solid var(--ink);
+    border-top-color: rgba(43, 36, 28, 0.2);
   }
 
   .cover-name {
-    font-family: 'Italiana', serif;
-    font-size: clamp(32px, 5.5vw, 64px);
-    letter-spacing: 12px;
-    margin: 8px 0 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(20px, 2.6vw, 30px);
+    letter-spacing: clamp(6px, 1.5vw, 12px);
+    text-transform: uppercase;
     color: var(--ink);
   }
 
   .cover-subtitle {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: clamp(15px, 1.8vw, 20px);
-    color: var(--ink-soft);
-    margin: 16px auto 0;
-    max-width: 460px;
+    font-weight: 300;
+    font-size: clamp(13px, 1.3vw, 15px);
+    color: var(--ink-faded);
+    line-height: 1.5;
+    text-align: center;
+    max-width: 320px;
+    margin: 0 auto;
   }
 
   .cover-date {
     font-family: 'Inter', sans-serif;
     font-size: 10px;
-    letter-spacing: 5px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--gold-deep);
-    margin-top: 24px;
+    color: var(--ink);
+    text-align: right;
+    line-height: 1.8;
+  }
+  .cover-date span {
+    display: block;
+    color: var(--terracotta, #b8553a);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* mobile */
+  @media (max-width: 700px) {
+    .cover-rail, .cover-index { display: none; }
+    .cover-content { padding: 80px 30px 30px; }
+    .cover-sixty-wrap { gap: 14px; }
+    .cover-meta { font-size: 9px; padding-left: 14px; }
+    .cover-footer {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      text-align: center;
+    }
+    .cover-subtitle, .cover-date { text-align: center; }
   }
 
   .ornament {
@@ -291,10 +547,30 @@
     padding: clamp(60px, 8vw, 110px) clamp(40px, 6vw, 80px);
   }
 
+  /* refined typographic chapter mark — no emoji flags */
   .country-flag {
-    font-size: clamp(44px, 6vw, 72px);
-    margin-bottom: 24px;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .country-flag .roman {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: clamp(20px, 2.4vw, 28px);
+    letter-spacing: 4px;
+    color: var(--terracotta);
+    line-height: 1;
+  }
+  .country-flag .locale {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    padding-top: 8px;
+    border-top: 1px solid rgba(184, 85, 58, 0.4);
   }
 
   .country h1 {
@@ -2675,9 +2951,334 @@
     .hint { bottom: 54px; font-size: 9px; }
     .layout-photo-only .photo-card img { max-height: 64vh; }
   }
+
+  /* ============================================================
+     ✨ ANIMATIONS — wow-factor layer
+     ============================================================ */
+
+  /* ambient container */
+  .petals {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  /* gold flecks — slow sparkles */
+  .fleck {
+    position: absolute;
+    top: -10px;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #d4a755 0%, transparent 70%);
+    border-radius: 50%;
+    animation: fleck-fall linear infinite;
+    opacity: 0;
+  }
+  @keyframes fleck-fall {
+    0% { transform: translate3d(0, 0, 0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.6; }
+    100% {
+      transform: translate3d(20px, 110vh, 0);
+      opacity: 0;
+    }
+  }
+
+  /* ---------- Character-by-character text reveal ---------- */
+  .reveal-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(14px) rotateX(-25deg);
+    transform-origin: bottom;
+    animation: char-bloom 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes char-bloom {
+    to {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg);
+    }
+  }
+
+  /* ---------- Handwriting effect for cursive (Parisienne) ---------- */
+  /* The trick: ink bleeds from left to right with a clip-path */
+  .handwrite {
+    background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    -webkit-text-fill-color: transparent;
+    color: var(--gold-deep);
+    animation: handwrite-fill 1.6s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+    animation-delay: var(--d, 0.1s);
+  }
+  @keyframes handwrite-fill {
+    to { background-position: 0 0; }
+  }
+
+  /* ink dot that traces along while writing */
+  .ink-cursor {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--gold-deep);
+    border-radius: 50%;
+    margin-left: -4px;
+    opacity: 0;
+    animation: ink-cursor 1.6s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+    box-shadow: 0 0 8px rgba(176, 138, 74, 0.6);
+  }
+  @keyframes ink-cursor {
+    0% { opacity: 0; transform: translateX(-100%); }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(0); }
+  }
+
+  /* ---------- Block reveal — used for paragraphs, decor, ornaments ---------- */
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes reveal-up {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal-fade {
+    opacity: 0;
+    animation: reveal-fade 1s ease-out forwards;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes reveal-fade {
+    to { opacity: 1; }
+  }
+
+  /* ornament expand */
+  .reveal-ornament {
+    opacity: 0;
+    letter-spacing: 0;
+    transform: scaleX(0.4);
+    animation: ornament-spread 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--d, 0s);
+    transform-origin: center;
+  }
+  @keyframes ornament-spread {
+    to {
+      opacity: 0.6;
+      letter-spacing: 6px;
+      transform: scaleX(1);
+    }
+  }
+
+  /* photos: blur + fade in, with a subtle lens-zoom */
+  .reveal-photo {
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.08);
+    animation: photo-bloom 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes photo-bloom {
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
+  }
+
+  /* polaroid drop-in: slight rotation + drop from above */
+  .reveal-polaroid {
+    opacity: 0;
+    transform: translateY(-30px) rotate(0deg) scale(0.92);
+    animation: polaroid-drop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes polaroid-drop {
+    to {
+      opacity: 1;
+      /* keep its tilt class transform — apply via :not() targeting; here just settle */
+      transform: translateY(0) rotate(var(--r, 0deg)) scale(1);
+    }
+  }
+
+  /* heart bloom + pulse */
+  .reveal-heart {
+    display: inline-block;
+    opacity: 0;
+    transform: scale(0.2) rotate(-30deg);
+    animation: heart-bloom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes heart-bloom {
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  /* === COVER ENTRANCE — Florentine modern === */
+
+  /* eyebrow appears with a draw-in line */
+  .cover.active .cover-eyebrow {
+    animation: cover-fade-up 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.4s both;
+  }
+
+  /* title — staggered word reveal happens via JS, but the wrapper fades */
+  .cover.active .cover-title {
+    animation: cover-fade-up 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.8s both;
+  }
+
+  /* the 60 — slowly arrives, italic, big */
+  .cover.active .cover-sixty {
+    animation: sixty-italic 2.2s cubic-bezier(0.22, 1, 0.36, 1) 2.4s both;
+    display: inline-block;
+  }
+  @keyframes sixty-italic {
+    0% {
+      opacity: 0;
+      transform: translateX(-30px) skewX(-8deg);
+      filter: blur(8px);
+      letter-spacing: 30px;
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0) skewX(0);
+      filter: blur(0);
+      letter-spacing: -16px;
+    }
+  }
+
+  /* polaroid drops in beside the 60 */
+  .cover.active .cover-polaroid {
+    animation: polaroid-pin 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 3.4s both;
+  }
+  @keyframes polaroid-pin {
+    0% {
+      opacity: 0;
+      transform: rotate(0deg) translateY(-40px) scale(0.9);
+    }
+    60% {
+      opacity: 1;
+      transform: rotate(6deg) translateY(4px) scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: rotate(4deg) translateY(0) scale(1);
+    }
+  }
+  /* the washi-tape pieces fade in slightly later */
+  .cover.active .cover-polaroid::before,
+  .cover.active .cover-polaroid::after {
+    animation: tape-stick 0.6s ease-out 4.2s both;
+  }
+  @keyframes tape-stick {
+    0% { opacity: 0; transform-origin: left; transform: rotate(-8deg) scaleX(0); }
+    100% { opacity: 1; }
+  }
+  .cover.active .cover-polaroid::after {
+    animation: tape-stick-r 0.6s ease-out 4.4s both;
+  }
+  @keyframes tape-stick-r {
+    0% { opacity: 0; transform-origin: right; transform: rotate(12deg) scaleX(0); }
+    100% { opacity: 1; transform: rotate(12deg) scaleX(1); }
+  }
+
+  /* footer reveals piece by piece */
+  .cover.active .cover-footer {
+    animation: cover-fade-up 1.4s cubic-bezier(0.22, 1, 0.36, 1) 4.0s both;
+  }
+
+  @keyframes cover-fade-up {
+    0% { opacity: 0; transform: translateY(14px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* page entry — paper rises from below with a soft glow */
+  .page.active .paper {
+    animation: paper-settle 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes paper-settle {
+    0% { opacity: 0; transform: translateY(20px) scale(0.985); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* glow burst when a page becomes active */
+  .glow-burst {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    background: radial-gradient(ellipse at center, rgba(212, 167, 85, 0.18) 0%, transparent 50%);
+    opacity: 0;
+    animation: glow-burst 1.2s ease-out;
+  }
+  @keyframes glow-burst {
+    0% { opacity: 0; transform: scale(0.7); }
+    30% { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.4); }
+  }
+
+
+  /* a word that "bleeds" in from underline */
+  .underline-grow {
+    position: relative;
+    display: inline-block;
+  }
+  .underline-grow::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 1px;
+    width: 0;
+    background: var(--gold);
+    animation: underline-grow 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--d, 0.6s);
+  }
+  @keyframes underline-grow {
+    to { width: 100%; }
+  }
+
+  /* sparkle accent that pings around on entry */
+  .sparkle {
+    position: absolute;
+    pointer-events: none;
+    color: var(--gold-light);
+    font-size: 14px;
+    opacity: 0;
+    animation: sparkle 1.4s ease-out forwards;
+    animation-delay: var(--d, 0s);
+    z-index: 5;
+  }
+  @keyframes sparkle {
+    0% { opacity: 0; transform: scale(0) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.3) rotate(180deg); }
+    100% { opacity: 0; transform: scale(0.8) rotate(360deg); }
+  }
+
+  /* subtle parallax tilt on hover for paper */
+  .paper { transition: transform 0.3s ease; }
+
+  /* respect users who hate motion */
+  @media (prefers-reduced-motion: reduce) {
+    .petal, .fleck, .reveal-char, .handwrite, .reveal-up, .reveal-fade,
+    .reveal-ornament, .reveal-photo, .reveal-polaroid, .reveal-heart,
+    .cover-sixty, .country .country-flag, .underline-grow::after, .sparkle,
+    .glow-burst, .page.active .paper {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      background-position: 0 0 !important;
+    }
+  }
 </style>
 </head>
 <body>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
 
 <button class="menu-button" id="menuBtn" aria-label="Sommaire">☰</button>
 
@@ -2841,10 +3442,13 @@
     };
   }
 
-  function countryHTML(flag, name, sub) {
+  function countryHTML(roman, locale, name, sub) {
     return `
       <div class="paper">
-        <span class="country-flag">${flag}</span>
+        <div class="country-flag">
+          <span class="roman">${roman}</span>
+          <span class="locale">${locale}</span>
+        </div>
         <h1>${name}</h1>
         <div class="country-line"></div>
         <div class="country-subtitle">~ ${sub} ~</div>
@@ -2863,14 +3467,57 @@
       type: 'cover',
       html: `
         <div class="paper">
-          <div class="cover-eyebrow">une célébration</div>
-          <div class="ornament">❦ ✦ ❦</div>
-          <div class="cover-title">Joyeux Anniversaire</div>
-          <div class="cover-sixty">60</div>
-          <div class="cover-name">ANNA</div>
-          <div class="cover-subtitle">Un recueil de mots,<br>de souvenirs et d'amour</div>
-          <div class="ornament">❦ ✦ ❦</div>
-          <div class="cover-date">M C M L X V · ★ · M M X X V I</div>
+          <!-- flowing animated SVG lines (Florentine ornamental flourishes) -->
+          <svg class="cover-svg" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <!-- big looping flourish from top right curving down behind the 60 -->
+            <path class="draw-on" d="M 1000 80 C 880 140, 760 100, 680 220 S 540 440, 420 480 S 240 540, 120 620"
+                  style="--len: 1500; --d: 0.2s; --dur: 3.2s;"/>
+            <!-- secondary thinner flourish below it -->
+            <path class="draw-on ink-line" d="M 980 160 C 840 220, 720 200, 640 320 S 480 540, 320 580"
+                  style="--len: 1300; --d: 0.7s; --dur: 3.0s;"/>
+            <!-- gold filigree swirl in the upper right -->
+            <path class="draw-on gold-line" d="M 820 60 Q 880 30, 920 70 T 980 130 Q 940 90, 880 110 T 820 60"
+                  style="--len: 600; --d: 1.1s; --dur: 2.4s;"/>
+            <!-- horizontal ink rule across the middle (subtle) -->
+            <line class="draw-on ink-line" x1="60" y1="370" x2="940" y2="370" style="--len: 880; --d: 1.6s; --dur: 1.8s; opacity: 0.3;"/>
+            <!-- bottom-left curling tendril -->
+            <path class="draw-on" d="M 40 660 Q 80 580, 160 600 T 280 580 Q 220 600, 200 640"
+                  style="--len: 600; --d: 2.2s; --dur: 2.4s; stroke-width: 1;"/>
+            <!-- decorative dot constellation in upper left -->
+            <circle class="draw-on" cx="80" cy="100" r="3" style="--len: 20; --d: 2.6s; --dur: 0.6s; fill: var(--terracotta); stroke: none;"/>
+            <circle class="draw-on" cx="120" cy="80" r="2" style="--len: 14; --d: 2.8s; --dur: 0.4s; fill: var(--terracotta); stroke: none;"/>
+            <circle class="draw-on" cx="140" cy="130" r="2.5" style="--len: 16; --d: 3.0s; --dur: 0.5s; fill: var(--terracotta); stroke: none;"/>
+            <!-- a subtle continuous slow drift overlay (after initial draw) -->
+            <path class="cover-svg-drift" d="M 0 280 C 250 240, 500 320, 750 270 S 1000 240, 1000 290"
+                  style="opacity: 0.2;"/>
+          </svg>
+
+          <div class="cover-rail">PER ANNA · LX · MMXXVI</div>
+          <div class="cover-index">vol. I</div>
+
+          <div class="cover-content">
+            <div class="cover-eyebrow">una celebrazione</div>
+
+            <div class="cover-sixty-wrap">
+              <span class="cover-sixty">60</span>
+              <div class="cover-polaroid">
+                <img src="anna-young.png" alt="Anna enfant">
+                <div class="cover-polaroid-caption">
+                  Anna
+                  <small>· la première année ·</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="cover-footer">
+              <div class="cover-name">ANNA</div>
+              <div class="cover-subtitle">un livre rassemblé avec amour<br>par ses fils</div>
+              <div class="cover-date">
+                <span>1966 — 2026</span>
+                Édition privée
+              </div>
+            </div>
+          </div>
         </div>
       `
     },
@@ -2894,7 +3541,7 @@
     // ============================================================
     // ENGLAND
     // ============================================================
-    { type: 'country', section: 'England', html: countryHTML('🇬🇧', 'England', 'Londres & alentours') },
+    { type: 'country', section: 'England', html: countryHTML('I', 'GBR · Londres', 'England', 'Londres & alentours') },
 
     msgPhotoSplit('Fabienne', `
       <p>Dear Anna,</p>
@@ -3028,7 +3675,7 @@
     // ============================================================
     // FRANCE
     // ============================================================
-    { type: 'country', section: 'France', html: countryHTML('🇫🇷', 'France', 'la patrie du cœur') },
+    { type: 'country', section: 'France', html: countryHTML('II', 'FRA · Paris', 'France', 'la patrie du cœur') },
 
     multiMsg([
       { author: 'Delphine', body: `
@@ -3145,7 +3792,7 @@
     // ============================================================
     // AUSTRALIE
     // ============================================================
-    { type: 'country', section: 'Australie', html: countryHTML('🇦🇺', 'Australie', 'au bout du monde') },
+    { type: 'country', section: 'Australie', html: countryHTML('III', 'AUS · Sydney', 'Australie', 'au bout du monde') },
 
     msgWithPhotoRow('Daniela & Gilles', `
       <p>Joyeux anniversaire chère Anna !</p>
@@ -3160,7 +3807,7 @@
     // ============================================================
     // DANEMARK
     // ============================================================
-    { type: 'country', section: 'Danemark', html: countryHTML('🇩🇰', 'Danemark', 'amitiés du Nord') },
+    { type: 'country', section: 'Danemark', html: countryHTML('IV', 'DNK · København', 'Danemark', 'amitiés du Nord') },
 
     msg('Mette', `
       <p style="text-align:center; font-style:italic; color: var(--ink-faded); padding: 40px 0;">~ avec tout son amour, depuis Copenhague ~</p>
@@ -3169,7 +3816,7 @@
     // ============================================================
     // ITALIA
     // ============================================================
-    { type: 'country', section: 'Italia', html: countryHTML('🇮🇹', 'Italia', 'le cœur toscan') },
+    { type: 'country', section: 'Italia', html: countryHTML('V', 'ITA · Firenze', 'Italia', 'le cœur toscan') },
 
     msgPhotoSplit('Lorenzo', `
       <p style="font-style:italic; color: var(--gold-deep);">Estate 1978, Spagna, Las Cadenas.</p>
@@ -3199,7 +3846,7 @@
     // ============================================================
     // USA
     // ============================================================
-    { type: 'country', section: 'USA', html: countryHTML('🇺🇸', 'USA', 'family across the ocean') },
+    { type: 'country', section: 'USA', html: countryHTML('VI', 'USA · Ohio', 'USA', 'family across the ocean') },
 
     msgPhotoSplit('Akiko', `
       <p>Dear Anna,</p>
@@ -3452,11 +4099,205 @@
     currentPage = idx;
     updateUI();
 
+    // ✨ animate elements inside the new page
+    requestAnimationFrame(() => animatePage(newEl));
+
     setTimeout(() => { isAnimating = false; }, 850);
   }
 
   function next() { goTo(currentPage + 1, 'next'); }
   function prev() { goTo(currentPage - 1, 'prev'); }
+
+  // ============================================================
+  // ✨ ANIMATION ORCHESTRATOR
+  // ============================================================
+  function animatePage(pageEl) {
+    if (!pageEl) return;
+
+    // glow burst
+    const burst = document.createElement('div');
+    burst.className = 'glow-burst';
+    document.body.appendChild(burst);
+    setTimeout(() => burst.remove(), 1300);
+
+    // remove any prior animation classes
+    pageEl.querySelectorAll('[data-anim]').forEach(el => {
+      const cls = el.dataset.anim;
+      el.classList.remove(cls);
+      el.style.animation = 'none';
+      void el.offsetWidth; // reflow
+      el.style.animation = '';
+      el.classList.add(cls);
+    });
+
+    let stagger = 0.05;
+    let idx = 0;
+
+    // 1) split message-author into chars (cursive handwriting bloom)
+    const author = pageEl.querySelector('.message-author');
+    if (author && !author.dataset.split) {
+      const text = author.textContent;
+      author.textContent = '';
+      author.dataset.split = '1';
+      [...text].forEach((c, i) => {
+        const span = document.createElement('span');
+        span.className = 'reveal-char';
+        span.style.setProperty('--d', (0.15 + i * stagger) + 's');
+        span.textContent = c === ' ' ? '\u00A0' : c;
+        author.appendChild(span);
+      });
+      // reset on subsequent visits — strip & re-trigger
+      author.querySelectorAll('.reveal-char').forEach(s => {
+        s.style.animation = 'none'; void s.offsetWidth; s.style.animation = '';
+      });
+    } else if (author) {
+      // re-trigger
+      author.querySelectorAll('.reveal-char').forEach((s, i) => {
+        s.style.animation = 'none'; void s.offsetWidth;
+        s.style.setProperty('--d', (0.15 + i * stagger) + 's');
+        s.style.animation = '';
+      });
+    }
+
+    // (cover-title and cover-name handled by dedicated CSS animations
+    //  on .cover.active — no per-char split needed here)
+
+    // 4) country name
+    const countryH2 = pageEl.querySelector('.country h2, .country h1');
+    if (countryH2 && !countryH2.dataset.split) {
+      splitChars(countryH2, 0.06, 0.4);
+      countryH2.dataset.split = '1';
+    } else if (countryH2) {
+      retrigger(countryH2, 0.06, 0.4);
+    }
+
+    // 5) ornaments + decor + paragraphs: stagger reveal-up
+    // skip cover-* elements — those have their own dedicated CSS animations
+    const isCover = pageEl.classList.contains('cover');
+    const decorSelector = isCover
+      ? '.message-decor, .ornament, .message-from, .country-line, .country-subtitle, .gallery-title, .country-flag'
+      : '.message-decor, .ornament, .message-from, .country-line, .country-subtitle, .cover-eyebrow, .cover-subtitle, .cover-date, .gallery-title, .country-flag';
+    const targets = pageEl.querySelectorAll(decorSelector);
+    targets.forEach((el, i) => {
+      el.style.animation = 'none'; void el.offsetWidth;
+      el.style.animation = `reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.4 + i * 0.08}s both`;
+    });
+
+    // 6) message body paragraphs — cascade
+    const paragraphs = pageEl.querySelectorAll('.message-body p, .intro p, .surprise p');
+    paragraphs.forEach((p, i) => {
+      p.style.animation = 'none'; void p.offsetWidth;
+      p.style.animation = `reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${0.6 + i * 0.12}s both`;
+    });
+
+    // 7) photos in cards — bloom in
+    const photos = pageEl.querySelectorAll('.photo-card');
+    photos.forEach((p, i) => {
+      p.style.animation = 'none'; void p.offsetWidth;
+      // preserve tilt
+      const isTiltL = p.classList.contains('tilt-l');
+      const isTiltR = p.classList.contains('tilt-r');
+      const tilt = isTiltL ? '-1.5deg' : isTiltR ? '1.5deg' : '0deg';
+      p.style.setProperty('--r', tilt);
+      p.style.animation = `polaroid-drop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.5 + i * 0.15}s both`;
+    });
+
+    // 8) gallery polaroids inside cards — keep their per-child rotation
+    const gridPhotos = pageEl.querySelectorAll('.gallery-grid .photo-card');
+    gridPhotos.forEach((p, i) => {
+      p.style.animation = 'none'; void p.offsetWidth;
+      p.style.animation = `polaroid-drop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.7 + i * 0.08}s both`;
+    });
+
+    // 9) hearts + ornaments inside content
+    const hearts = pageEl.querySelectorAll('.heart');
+    hearts.forEach((h, i) => {
+      h.style.animation = 'none'; void h.offsetWidth;
+      h.style.animation = `heart-bloom 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.8 + i * 0.2}s both, pulse 2s ease-in-out infinite ${1.7 + i * 0.2}s`;
+    });
+
+    // 10) family tree: cascade names
+    const treeNames = pageEl.querySelectorAll('.ftg-name, .ftg-cousin-name');
+    treeNames.forEach((n, i) => {
+      n.style.animation = 'none'; void n.offsetWidth;
+      n.style.animation = `reveal-fade 0.6s ease-out ${0.4 + i * 0.08}s both`;
+    });
+
+    // sparkles for cover & country pages
+    if (pageEl.classList.contains('cover') || pageEl.classList.contains('country') || pageEl.classList.contains('surprise')) {
+      spawnSparkles(pageEl, 8);
+    }
+  }
+
+  function splitChars(el, stagger, baseDelay) {
+    const text = el.textContent;
+    el.textContent = '';
+    [...text].forEach((c, i) => {
+      const span = document.createElement('span');
+      span.className = 'reveal-char';
+      span.style.setProperty('--d', (baseDelay + i * stagger) + 's');
+      span.textContent = c === ' ' ? '\u00A0' : c;
+      el.appendChild(span);
+    });
+  }
+  function retrigger(el, stagger, baseDelay) {
+    el.querySelectorAll('.reveal-char').forEach((s, i) => {
+      s.style.animation = 'none'; void s.offsetWidth;
+      s.style.setProperty('--d', (baseDelay + i * stagger) + 's');
+      s.style.animation = '';
+    });
+  }
+
+  function spawnSparkles(parent, count) {
+    const paper = parent.querySelector('.paper');
+    if (!paper) return;
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement('span');
+      s.className = 'sparkle';
+      s.textContent = '✦';
+      s.style.left = (10 + Math.random() * 80) + '%';
+      s.style.top = (10 + Math.random() * 80) + '%';
+      s.style.setProperty('--d', (0.6 + Math.random() * 1.5) + 's');
+      s.style.fontSize = (10 + Math.random() * 16) + 'px';
+      paper.appendChild(s);
+      setTimeout(() => s.remove(), 2500);
+    }
+  }
+
+  // ============================================================
+  // ✨ AMBIENT PETALS + GOLD FLECKS
+  // ============================================================
+  function spawnPetals() {
+    const container = document.getElementById('petals');
+    if (!container) return;
+
+    function add(type) {
+      const el = document.createElement('span');
+      el.className = type;
+      const dur = type === 'petal'
+        ? 14 + Math.random() * 14
+        : 18 + Math.random() * 14;
+      el.style.left = Math.random() * 100 + '%';
+      el.style.animationDuration = dur + 's';
+      el.style.animationDelay = -Math.random() * dur + 's';
+      if (type === 'petal') {
+        const size = 8 + Math.random() * 10;
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+      }
+      container.appendChild(el);
+      setTimeout(() => el.remove(), dur * 1000);
+    }
+
+    // initial seed — gold flecks only, sparse
+    for (let i = 0; i < 6; i++) add('fleck');
+
+    // ongoing
+    setInterval(() => add('fleck'), 3500);
+  }
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    spawnPetals();
+  }
 
   function updateUI() {
     document.getElementById('counterText').textContent =
@@ -3582,6 +4423,11 @@
   document.getElementById('lightbox').addEventListener('click', closeLightbox);
 
   updateUI();
+
+  // ✨ kick off animations on the first (cover) page
+  requestAnimationFrame(() => {
+    setTimeout(() => animatePage(pageEls[0]), 100);
+  });
 </script>
 
 </body>

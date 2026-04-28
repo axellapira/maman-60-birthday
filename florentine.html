@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anna · LX · Florentine Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Italianno&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Florentine palette */
+    --ivory: #f3ead8;
+    --ivory-deep: #e8dbbf;
+    --parchment: #ebe1c7;
+    --terracotta: #b8553a;
+    --terracotta-dark: #8b3a23;
+    --terracotta-light: #d6856a;
+    --olive: #6f7340;
+    --olive-deep: #4d5128;
+    --gold: #b89146;
+    --gold-deep: #8a6a30;
+    --burgundy: #6b1d2e;
+    --ink: #2a1d11;
+    --ink-soft: #5a4533;
+    --azzurro: #4a6b7a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'EB Garamond', 'Cormorant Garamond', serif;
+    background: var(--ivory);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    background-image:
+      /* paper grain */
+      radial-gradient(circle at 30% 20%, rgba(184, 85, 58, 0.025) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(111, 115, 64, 0.03) 0%, transparent 50%),
+      /* fine noise */
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.6 0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============================================================
+     ORNAMENTAL FRESCO BORDERS — used on key elements
+     ============================================================ */
+  .fresco-border {
+    position: relative;
+    padding: 28px;
+  }
+  .fresco-border::before, .fresco-border::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+  .fresco-border::before {
+    inset: 8px;
+    border: 2px solid var(--terracotta);
+    border-radius: 2px;
+  }
+  .fresco-border::after {
+    inset: 14px;
+    border: 1px solid var(--gold);
+  }
+
+  /* ============================================================
+     PIETRA SERENA — section labels in Roman caps
+     ============================================================ */
+  .pietra {
+    font-family: 'Cinzel', serif;
+    letter-spacing: clamp(4px, 1vw, 10px);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ============================================================
+     COVER — like a frescoed altarpiece
+     ============================================================ */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px 60px;
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(184, 85, 58, 0.08) 0%, transparent 60%),
+      linear-gradient(180deg, var(--ivory) 0%, var(--ivory-deep) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* arched frame around the cover */
+  .cover-arch {
+    width: min(700px, 92vw);
+    background: var(--parchment);
+    border-radius: 50% 50% 4px 4px / 18% 18% 4px 4px;
+    padding: 80px 60px 60px;
+    text-align: center;
+    position: relative;
+    box-shadow:
+      inset 0 0 0 2px var(--terracotta-dark),
+      inset 0 0 0 4px var(--ivory),
+      inset 0 0 0 5px var(--gold),
+      0 30px 80px rgba(43, 29, 17, 0.2),
+      0 4px 12px rgba(43, 29, 17, 0.08);
+    background-image:
+      radial-gradient(circle at top, rgba(255, 248, 225, 0.5) 0%, transparent 50%);
+  }
+
+  /* decorative laurel above */
+  .cover-arch::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 60px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 60'%3E%3Cpath d='M40 50 Q20 40 12 25 Q15 30 20 30 Q25 25 25 18 Q30 25 32 32 Q35 28 38 22 Q40 30 40 38 Q40 30 42 22 Q45 28 48 32 Q50 25 55 18 Q55 25 60 30 Q65 30 68 25 Q60 40 40 50 Z' fill='%238a6a30' opacity='0.35'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .cover-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 8px;
+    color: var(--terracotta-dark);
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }
+
+  .cover-title {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(60px, 11vw, 130px);
+    color: var(--terracotta-dark);
+    line-height: 0.9;
+    margin-bottom: 30px;
+    transform: rotate(-1deg);
+  }
+
+  /* the giant LX (Roman 60) */
+  .cover-numeral {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(120px, 22vw, 280px);
+    color: var(--terracotta);
+    line-height: 0.9;
+    letter-spacing: 0;
+    font-weight: 600;
+    text-shadow:
+      0 1px 0 var(--ivory),
+      0 2px 0 var(--ivory),
+      0 3px 0 var(--ivory-deep),
+      0 4px 12px rgba(139, 58, 35, 0.4);
+    margin: 20px 0 30px;
+    background: linear-gradient(180deg, var(--terracotta-light) 0%, var(--terracotta) 50%, var(--terracotta-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cover-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: clamp(8px, 2vw, 18px);
+    color: var(--ink);
+    margin: 20px 0 10px;
+    font-weight: 500;
+  }
+
+  .cover-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: clamp(15px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    max-width: 440px;
+    margin: 24px auto 0;
+  }
+
+  .cover-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 30px auto;
+    position: relative;
+  }
+  .cover-rule::before {
+    content: '✦';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--parchment);
+    padding: 0 8px;
+    color: var(--gold);
+    font-size: 12px;
+  }
+
+  .cover-date {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--terracotta-dark);
+  }
+
+  /* scroll cue */
+  .scroll-cue {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--terracotta-dark);
+    opacity: 0.7;
+    animation: scroll-bob 2s ease-in-out infinite;
+  }
+  @keyframes scroll-bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ============================================================
+     INTRO — illuminated drop cap
+     ============================================================ */
+  .intro {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 140px 40px 100px;
+    text-align: center;
+  }
+
+  .intro-mark {
+    font-family: 'Italianno', cursive;
+    font-size: 80px;
+    color: var(--terracotta);
+    line-height: 0.5;
+    margin-bottom: 30px;
+  }
+
+  .intro h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    letter-spacing: 8px;
+    color: var(--ink);
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+
+  .intro p {
+    font-size: clamp(16px, 1.7vw, 19px);
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    text-align: justify;
+    text-align-last: center;
+  }
+
+  /* drop cap on first paragraph */
+  .intro p:first-of-type::first-letter {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 4.5em;
+    line-height: 0.85;
+    float: left;
+    color: var(--terracotta-dark);
+    margin: 4px 12px 0 0;
+    padding: 4px 8px 0 0;
+    background: linear-gradient(180deg, var(--ivory-deep) 0%, var(--parchment) 100%);
+    border: 1px solid var(--gold);
+    box-shadow: 2px 2px 0 var(--ivory-deep), 4px 4px 0 var(--gold);
+  }
+
+  /* ============================================================
+     COUNTRY DIVIDERS — like a frescoed banner
+     ============================================================ */
+  .country {
+    text-align: center;
+    padding: 120px 40px;
+    margin: 60px auto;
+    max-width: 1100px;
+    position: relative;
+  }
+
+  .country-banner {
+    display: inline-block;
+    padding: 40px 80px;
+    background:
+      linear-gradient(135deg, var(--terracotta) 0%, var(--terracotta-dark) 100%);
+    color: var(--ivory);
+    position: relative;
+    box-shadow: 0 20px 60px rgba(107, 29, 46, 0.25);
+    transform: skewX(-2deg);
+  }
+  .country-banner > * { transform: skewX(2deg); display: block; }
+
+  .country-banner::before, .country-banner::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 60px;
+    background: var(--terracotta);
+    transform: translateY(-50%) skewX(2deg);
+  }
+  .country-banner::before {
+    left: -30px;
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%, 0 50%);
+    background: var(--terracotta-dark);
+  }
+  .country-banner::after {
+    right: -30px;
+    clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100%);
+    background: var(--terracotta-dark);
+  }
+
+  .country-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 6px;
+    color: rgba(255, 248, 225, 0.7);
+    margin-bottom: 14px;
+  }
+  .country-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: clamp(8px, 1.6vw, 16px);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .country-flag {
+    font-size: 32px;
+    margin-top: 16px;
+  }
+
+  /* ============================================================
+     MESSAGE — fresco with archway
+     ============================================================ */
+  .message {
+    max-width: 980px;
+    margin: 80px auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .message-card {
+    background: var(--parchment);
+    padding: 60px clamp(32px, 5vw, 72px);
+    position: relative;
+    box-shadow:
+      0 1px 3px rgba(43, 29, 17, 0.08),
+      0 30px 80px rgba(43, 29, 17, 0.12);
+    border-top: 4px solid var(--terracotta);
+    background-image:
+      linear-gradient(180deg, rgba(255, 248, 225, 0.4) 0%, transparent 30%);
+  }
+
+  /* small fresco corner ornaments */
+  .message-card::before, .message-card::after {
+    content: '✦';
+    position: absolute;
+    color: var(--gold);
+    font-size: 12px;
+    opacity: 0.6;
+  }
+  .message-card::before { top: 16px; left: 16px; }
+  .message-card::after { bottom: 16px; right: 16px; }
+
+  .message-from {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: var(--terracotta-dark);
+    text-align: center;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .message-author {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(48px, 6vw, 72px);
+    color: var(--terracotta-dark);
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .message-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 16px auto 28px;
+    position: relative;
+  }
+  .message-rule::before {
+    content: '❦';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--parchment);
+    padding: 0 6px;
+    color: var(--terracotta);
+    font-size: 12px;
+  }
+
+  .message-body {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.85;
+    color: var(--ink);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .message-body p { margin-bottom: 14px; }
+  .message-body em { color: var(--ink-soft); }
+  .message-body strong { color: var(--terracotta-dark); font-weight: 500; }
+
+  /* ============================================================
+     IMAGE LAYOUTS — archway photo frames
+     ============================================================ */
+  .photo-arch {
+    margin: 40px auto 0;
+    max-width: 480px;
+    padding: 14px;
+    background:
+      linear-gradient(180deg, var(--terracotta) 0%, var(--terracotta-dark) 100%);
+    border-radius: 50% 50% 4px 4px / 30% 30% 4px 4px;
+    box-shadow:
+      0 4px 16px rgba(107, 29, 46, 0.2),
+      0 20px 40px rgba(43, 29, 17, 0.15);
+    position: relative;
+  }
+  .photo-arch::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--gold);
+    border-radius: 50% 50% 2px 2px / 28% 28% 2px 2px;
+    pointer-events: none;
+  }
+  .photo-arch img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: cover;
+    border-radius: 50% 50% 2px 2px / 28% 28% 2px 2px;
+  }
+  .photo-arch-caption {
+    text-align: center;
+    margin-top: 14px;
+    font-family: 'Italianno', cursive;
+    font-size: 22px;
+    color: var(--ink-soft);
+  }
+
+  /* SPLIT layout — text + photo arch side by side */
+  .layout-split {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(30px, 5vw, 60px);
+    align-items: center;
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+  }
+
+  .layout-split.flip {
+    grid-template-columns: 1fr 1.1fr;
+  }
+  .layout-split.flip .text-col { order: 2; }
+  .layout-split.flip .photo-col { order: 1; }
+
+  .layout-split .text-col {
+    background: var(--parchment);
+    padding: 50px 40px;
+    box-shadow: 0 20px 50px rgba(43, 29, 17, 0.1);
+    border-left: 4px solid var(--terracotta);
+    background-image: linear-gradient(180deg, rgba(255, 248, 225, 0.4) 0%, transparent 50%);
+  }
+
+  .layout-split .photo-arch {
+    margin: 0;
+    max-width: 100%;
+  }
+  .layout-split .photo-arch img {
+    max-height: 70vh;
+  }
+
+  /* multi-photo gallery — irregular Florentine grid */
+  .gallery {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+  }
+  .gallery-title {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(36px, 4.5vw, 56px);
+    color: var(--terracotta-dark);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .gallery-author {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--gold-deep);
+    text-align: center;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  .gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .gallery-photo {
+    flex: 0 1 auto;
+    background: var(--ivory);
+    padding: 10px 10px 32px;
+    box-shadow: 0 4px 14px rgba(43, 29, 17, 0.12), 0 14px 40px rgba(43, 29, 17, 0.06);
+    border: 1px solid var(--ivory-deep);
+    transition: transform 0.4s;
+  }
+  .gallery-photo:nth-child(4n+1) { transform: rotate(-1.5deg); }
+  .gallery-photo:nth-child(4n+2) { transform: rotate(1deg); }
+  .gallery-photo:nth-child(4n+3) { transform: rotate(-0.5deg); }
+  .gallery-photo:nth-child(4n+4) { transform: rotate(2deg); }
+  .gallery-photo:hover { transform: scale(1.04) rotate(0deg); z-index: 5; }
+
+  .gallery-photo img {
+    display: block;
+    height: 220px;
+    width: auto;
+    max-width: 100%;
+  }
+  .gallery-photo .cap {
+    font-family: 'Italianno', cursive;
+    text-align: center;
+    margin-top: 6px;
+    font-size: 18px;
+    color: var(--ink-soft);
+    line-height: 1.2;
+  }
+
+  /* ============================================================
+     FAMILY TREE — same logic but florentine palette
+     ============================================================ */
+  .tree-section {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 60px 40px;
+    background: var(--parchment);
+    box-shadow: 0 30px 80px rgba(43, 29, 17, 0.12);
+    border-top: 4px solid var(--olive);
+    text-align: center;
+  }
+  .tree-section h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(20px, 2.6vw, 28px);
+    letter-spacing: 6px;
+    color: var(--olive-deep);
+    margin-bottom: 6px;
+  }
+  .tree-section .sub {
+    font-family: 'Italianno', cursive;
+    font-size: 28px;
+    color: var(--terracotta);
+    margin-bottom: 30px;
+  }
+
+  .florentine-tree {
+    --branch: rgba(138, 106, 48, 0.65);
+    --rose: var(--terracotta);
+    --col-name: clamp(95px, 12vw, 150px);
+    --col-gap: clamp(40px, 7vw, 90px);
+    --col-sib: clamp(30px, 5vw, 60px);
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+  .ftrow {
+    display: grid;
+    grid-template-columns:
+      var(--col-name) var(--col-gap) var(--col-name) var(--col-sib)
+      var(--col-name) var(--col-gap) var(--col-name);
+    justify-content: center;
+    align-items: center;
+  }
+  .ftcell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .ft-name {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(12px, 1.2vw, 15px);
+    color: var(--ink);
+    text-align: center;
+  }
+  .ft-heart { color: var(--rose); font-size: 14px; margin: 0 4px; }
+  .ft-line {
+    flex: 1;
+    height: 0;
+    border-top: 1px solid var(--branch);
+    min-width: 14px;
+  }
+  .ft-marry {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    margin: 0 6px;
+  }
+  .ft-marry .ft-line { width: 22px; flex: 0 0 auto; }
+
+  /* Gen 1 (grandparents) */
+  .ft-gp .ftcell:nth-child(1) {
+    grid-column: 3 / 6;
+    display: flex;
+    justify-content: center;
+  }
+  .ft-gp .ftcell:nth-child(2) {
+    grid-column: 6 / 8;
+    transform: translateX(calc(var(--col-gap) / 2));
+  }
+  .ft-gp .ft-name { white-space: nowrap; }
+
+  /* Ancestry rows */
+  .ft-anc-a { height: 14px; }
+  .ft-anc-a .stem { position: relative; height: 100%; }
+  .ft-anc-a .stem::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--branch);
+  }
+  .ft-anc-b { height: 14px; }
+  .ft-anc-b .bar {
+    position: relative;
+    height: 100%;
+  }
+  .ft-anc-b .bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--col-name) / 2 - 0.5px);
+    right: calc(-1 * var(--col-name) / 2 - 0.5px);
+    height: 1px;
+    background: var(--branch);
+  }
+  .ft-anc-b .leg { position: relative; height: 100%; }
+  .ft-anc-b .leg::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--branch);
+  }
+
+  /* Descent + cousin bars */
+  .ft-desc { height: 16px; }
+  .ft-desc .drop { position: relative; height: 100%; }
+  .ft-desc .drop::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--branch);
+  }
+  .ft-cbar { height: 16px; }
+  .ft-cbar .bar2 { position: relative; height: 100%; }
+  .ft-cbar .bar2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--col-name) / 2 - 0.5px);
+    right: calc(-1 * var(--col-name) / 2 - 0.5px);
+    height: 1px;
+    background: var(--branch);
+  }
+  .ft-cbar .bar2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc(100% + var(--col-name));
+    left: calc(-1 * var(--col-name) / 2 - 0.5px);
+    border-left: 1px solid var(--branch);
+    border-right: 1px solid var(--branch);
+  }
+  .ft-cbar .bar3 { position: relative; height: 100%; }
+  .ft-cbar .bar3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--col-name) / 2 - 0.5px);
+    right: calc(-1 * var(--col-name) / 2 - 0.5px);
+    height: 1px;
+    background: var(--branch);
+  }
+  .ft-cbar .bar3 .midstem {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--branch);
+  }
+  .ft-cbar .bar3::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc(100% + var(--col-name));
+    left: calc(-1 * var(--col-name) / 2 - 0.5px);
+    border-left: 1px solid var(--branch);
+    border-right: 1px solid var(--branch);
+  }
+
+  /* Cousins themselves */
+  .ft-cousins { padding-top: 6px; }
+  .ft-cousins .group2,
+  .ft-cousins .group3 {
+    width: calc(100% + var(--col-name));
+    margin: 0 calc(-1 * var(--col-name) / 2);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .ft-cousin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+  }
+  .ft-cousin .name {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(22px, 2.4vw, 30px);
+    color: var(--olive-deep);
+    line-height: 1.1;
+    padding: 0 6px 4px;
+    border-bottom: 1px solid var(--branch);
+  }
+  .ft-cousin .sub {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+  .ft-cousin.anna .name {
+    color: var(--terracotta-dark);
+    font-size: clamp(28px, 3vw, 38px);
+    border-bottom: 2px solid var(--terracotta);
+    position: relative;
+  }
+  .ft-cousin.anna .name::after {
+    content: '✦';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: var(--terracotta);
+    background: var(--parchment);
+    padding: 0 4px;
+  }
+  .ft-cousin.anna .sub { color: var(--terracotta); }
+
+  /* ============================================================
+     FINALE — like a Renaissance closing colophon
+     ============================================================ */
+  .finale {
+    text-align: center;
+    padding: 140px 40px 80px;
+    background:
+      radial-gradient(ellipse at top, var(--ivory) 0%, var(--ivory-deep) 80%);
+    margin-top: 80px;
+  }
+  .finale-mark {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 8px;
+    color: var(--gold-deep);
+    margin-bottom: 20px;
+  }
+  .finale h2 {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(48px, 7vw, 88px);
+    color: var(--terracotta-dark);
+    line-height: 1;
+    margin-bottom: 30px;
+  }
+  .finale p {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 20px);
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin: 0 auto 18px;
+    line-height: 1.7;
+  }
+  .finale-quote {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 20px);
+    color: var(--ink);
+    max-width: 580px;
+    margin: 40px auto;
+    line-height: 1.6;
+    position: relative;
+    padding: 30px 0;
+  }
+  .finale-quote::before, .finale-quote::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .finale-quote::before { top: 0; }
+  .finale-quote::after { bottom: 0; }
+
+  .finale-signature {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--ink);
+    margin-top: 50px;
+  }
+  .finale-signature small {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--terracotta-dark);
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+
+  /* ============================================================
+     TOC NAVIGATION (sticky, side)
+     ============================================================ */
+  .side-nav {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .side-nav a {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    opacity: 0.3;
+    transition: all 0.3s;
+    cursor: pointer;
+    display: block;
+    position: relative;
+  }
+  .side-nav a:hover {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+  .side-nav a:hover::before {
+    content: attr(data-label);
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--terracotta-dark);
+    background: var(--ivory);
+    padding: 4px 10px;
+    border: 1px solid var(--gold);
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+  .side-nav a.active { opacity: 1; transform: scale(1.4); }
+
+  /* ============================================================
+     LIGHTBOX
+     ============================================================ */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(43, 29, 17, 0.95);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    cursor: zoom-out;
+  }
+  .lightbox.open { opacity: 1; visibility: visible; }
+  .lightbox img {
+    max-width: 92vw;
+    max-height: 92vh;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    border: 8px solid var(--ivory);
+  }
+  .photo-arch img, .gallery-photo img {
+    cursor: zoom-in;
+  }
+
+  /* ============================================================
+     MOBILE
+     ============================================================ */
+  @media (max-width: 800px) {
+    .layout-split, .layout-split.flip {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .layout-split.flip .text-col { order: 1; }
+    .layout-split.flip .photo-col { order: 2; }
+    .message-card, .layout-split .text-col { padding: 40px 28px; }
+    .gallery-photo img { height: 140px; }
+    .country-banner { padding: 28px 50px; }
+    .country-banner::before, .country-banner::after { display: none; }
+    .side-nav { display: none; }
+    .photo-arch { max-width: 90%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Side navigation dots -->
+<nav class="side-nav">
+  <a href="#cover" data-label="Frontespizio"></a>
+  <a href="#intro" data-label="Prologo"></a>
+  <a href="#england" data-label="Inghilterra"></a>
+  <a href="#france" data-label="Francia"></a>
+  <a href="#australia" data-label="Australia"></a>
+  <a href="#denmark" data-label="Danimarca"></a>
+  <a href="#italia" data-label="Italia"></a>
+  <a href="#usa" data-label="America"></a>
+  <a href="#finale" data-label="Coda"></a>
+</nav>
+
+<!-- ============================================================
+     COVER
+     ============================================================ -->
+<section class="cover" id="cover">
+  <div class="cover-arch">
+    <div class="cover-eyebrow">— una celebrazione —</div>
+    <div class="cover-title">Tanti Auguri</div>
+    <div class="cover-numeral">LX</div>
+    <div class="cover-name">ANNA</div>
+    <div class="cover-rule"></div>
+    <div class="cover-subtitle">Un libro di parole, di ricordi e di amore — per i tuoi sessant'anni</div>
+    <div class="cover-rule" style="margin-top: 30px;"></div>
+    <div class="cover-date">M C M L X V · ★ · M M X X V I</div>
+  </div>
+  <div class="scroll-cue">↓ scorri ↓</div>
+</section>
+
+<!-- ============================================================
+     INTRO
+     ============================================================ -->
+<section class="intro" id="intro">
+  <div class="intro-mark">~</div>
+  <h2>PROLOGO</h2>
+  <p>Sessant'anni di risate, di viaggi, di tenerezza e di coraggio. Per celebrare questa pagina magnifica della tua vita, abbiamo raccolto le parole di coloro che ti amano — sparsi per il mondo, da Londra a Firenze, da Parigi a Sydney, da New York a Copenhagen.</p>
+  <p>Ogni pagina è un bacio, un abbraccio, una dichiarazione. Un mosaico di amicizie e di amore che disegna la donna straordinaria che sei.</p>
+  <p style="margin-top: 30px;"><em>Con tutto il nostro amore,<br>Mathias &amp; Axel</em></p>
+</section>
+
+<!-- ============================================================
+     ENGLAND
+     ============================================================ -->
+<section class="country" id="england">
+  <div class="country-banner">
+    <div class="country-eyebrow">— capitolo primo —</div>
+    <div class="country-name">INGHILTERRA</div>
+    <div class="country-flag">🇬🇧</div>
+  </div>
+</section>
+
+<!-- Fabienne -->
+<div class="layout-split">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Fabienne</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Dear Anna,</p>
+      <p>Happy 60th birthday !! Here's to many more deep conversations, coffees, apéros, and endless laughter.</p>
+      <p>You only get better with time, thank you for always sharing your wisdom.</p>
+      <p><em>Lots of love,<br>Fabienne</em></p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image8.jpg" alt="Fabienne & Anna" data-zoom="photos/image8.jpg">
+    </div>
+  </div>
+</div>
+
+<!-- Sandrine -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Sandrine</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Ma chère Anna,</p>
+      <p>Nous avons passé de si merveilleux moments ensemble depuis presque 10 ans. Faisons encore mieux pour la prochaine décennie !</p>
+      <p><strong>(1)</strong> St Paul · puis le COVID a frappé et nous sommes devenues le COVID girl gang.</p>
+      <p><strong>(2)</strong> Au book club — la plus passionnée et la plus sérieuse.</p>
+      <p><strong>(3)</strong> Pleine de talents éclectiques. Anna coiffeuse… Gabriella est une grande fan.</p>
+      <p><strong>(4)</strong> À Noirmoutier — la fête, la plage, les beaux maillots de bain.</p>
+      <p><em>Joyeux anniversaire merveilleuse Anna !</em></p>
+    </div>
+  </div>
+</div>
+<div class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image43.jpg" data-zoom="photos/image43.jpg" alt=""><div class="cap">St Paul · COVID girl gang</div></div>
+    <div class="gallery-photo"><img src="photos/image33.jpg" data-zoom="photos/image33.jpg" alt=""><div class="cap">Book club</div></div>
+    <div class="gallery-photo"><img src="photos/image14.jpg" data-zoom="photos/image14.jpg" alt=""><div class="cap">Anna coiffeuse</div></div>
+    <div class="gallery-photo"><img src="photos/image38.jpg" data-zoom="photos/image38.jpg" alt=""><div class="cap">Noirmoutier</div></div>
+  </div>
+</div>
+
+<!-- Virginie -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Virginie</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Quel plaisir d'avoir rencontré Anna par hasard lors d'une pendaison de crémaillère avant le Covid et de la découvrir de zooms en groupe de lecture.</p>
+      <p>Quelle joie de mieux la connaître au fil des années, de la voir ajouter de nouvelles flèches à son arc déjà bien fourni en charmes et talents et développer une entièrement nouvelle carrière.</p>
+      <p><em>Bravo et tous mes souhaits pour cette nouvelle page de vie, la soixantaine magnifique !</em></p>
+    </div>
+  </div>
+</div>
+<div class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image1.jpg" data-zoom="photos/image1.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image40.jpg" data-zoom="photos/image40.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- Luciana -->
+<div class="layout-split flip">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Luciana</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Cara Anna,</p>
+      <p>le foto ci ricordano momenti felici ma in tutti questi anni tu ci sei sempre stata, anche in quelli difficili.</p>
+      <p>Con la speranza di innumerevoli momenti meravigliosi ti auguro un</p>
+      <p style="text-align:center; font-size: 1.15em;"><em>Buon 30×2 compleanno my lovely friend ✦</em></p>
+      <p>So happy to have you in my life.</p>
+      <p><em>Luciana</em></p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image25.jpg" data-zoom="photos/image25.jpg" alt="Luciana & Anna">
+    </div>
+  </div>
+</div>
+<div class="gallery"><div class="gallery-grid">
+  <div class="gallery-photo"><img src="photos/image47.jpg" data-zoom="photos/image47.jpg" alt=""></div>
+</div></div>
+
+<!-- Giovanna -->
+<div class="layout-split">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Giovanna</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Cara Anna,</p>
+      <p>oggi festeggi un traguardo importante. Ti auguro di poterlo fare circondata dall'affetto della tua famiglia e dei tuoi amici più cari.</p>
+      <p>Spero che i tuoi sogni abbiano trovato voce… ti auguro di celebrare questo momento con il cuore pieno di gioia e che la vita ti riservi ancora tante cose belle.</p>
+      <p><em>Un grande abbraccio,<br>Gio</em></p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image5.jpg" data-zoom="photos/image5.jpg" alt="Giovanna">
+    </div>
+  </div>
+</div>
+<div class="gallery"><div class="gallery-grid">
+  <div class="gallery-photo"><img src="photos/image39.jpg" data-zoom="photos/image39.jpg" alt=""></div>
+</div></div>
+
+<!-- Simona -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Simona</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Buon 60° compleanno, cara amica !</p>
+      <p>In te c'è un meraviglioso mix di eleganza francese, calore italiano e spirito anglosassone : raffinata e piena di gusto per le cose belle, affettuosa e sempre pronta a guardare avanti con energia e ottimismo.</p>
+      <p>Sei unica proprio per questo, un perfetto equilibrio di culture e di cuore.</p>
+      <p>Sappi che ti ammiro per il percorso che hai intrapreso e che ti ha permesso di diventare una professionista. Che questo nuovo capitolo ti regali sogni, sorrisi e mille momenti felici.</p>
+      <p>Grazie per la tua amicizia, per la tua presenza e per tutte le risate condivise…</p>
+      <p style="text-align:center;"><em>The best is yet to come !</em></p>
+      <p><em>Un abbraccio,<br>Simona ✦</em></p>
+    </div>
+  </div>
+</div>
+
+<!-- Francesca -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Francesca</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Cara Anna,</p>
+      <p>anche se ci siamo conosciute in una fase matura della nostra vita, il tempo trascorso insieme a Londra ha fatto sbocciare una bellissima amicizia tra noi che, nonostante la lontananza, sento molto forte e mi auguro che duri per tanto altro tempo ancora.</p>
+      <p>Mi sei stata vicina in uno dei momenti più brutti della mia vita e non ti sarò mai abbastanza riconoscente per il tuo sostegno durante le lunghe chiacchierate mattutine post palestra davanti al nostro cappuccino su Northcote Road.</p>
+      <p>Ammiro la tua lealtà, la tua capacità di ascoltare e soprattutto la forza di volontà con cui ti sei "reinventata", rimettendoti a studiare alla ricerca della "nuova" Anna.</p>
+      <p>Mi auguro che questo importante compleanno rappresenti l'inizio di una vita serena e felice in compagnia delle persone che ti vogliono bene.</p>
+      <p><em>Un abbraccio forte forte<br>Ti voglio bene<br>Francesca</em></p>
+    </div>
+  </div>
+</div>
+<div class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image15.jpg" data-zoom="photos/image15.jpg" alt=""><div class="cap">Northcote Road</div></div>
+    <div class="gallery-photo"><img src="photos/image22.jpg" data-zoom="photos/image22.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- David -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">David</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Dear Anna,</p>
+      <p>As you celebrate this important and special birthday, it's an opportunity for me to tell you how much I appreciate you and the friendship that we have. You are a person of such sensitivity, generosity of heart and mind, and a willingness to give of yourself in friendship that I consider it such an honour to have known you.</p>
+      <p>Thank you for the kindness, patience, and thoughtfulness you have shown to me. To have been a part of your life, and Axel's, since your move to London has been a privilege.</p>
+      <p><em>With love and affection,<br>David</em></p>
+    </div>
+  </div>
+</div>
+
+<!-- Gabriella + Felix -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Gabriella</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Dearest Anna,</p>
+      <p>firstly I cannot put into words how important and how integral you have been to my life, despite meeting only a few years ago. Your utter unconditional love of your friends and selflessness is something that I admire so much.</p>
+      <p>You adore your two gorgeous boys and they are the epicentre of your world. But also you raised two brilliant kids who are a testimony to you. I love our friendship more than anything and so incredibly grateful to have you in my life.</p>
+      <p>Remember the ring chat ? You will be there when it eventually happens and that means everything to me. You are truly a wonderful and incredibly inspiring woman and somebody I will always admire and adore xx</p>
+      <p><em>love Gaby</em></p>
+    </div>
+  </div>
+</div>
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Felix</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>I've loved getting to know you and your family, and cherish your wisdom and insight.</p>
+      <p style="margin-top: 16px;"><em>P.S.: you look great in green.</em></p>
+    </div>
+  </div>
+</div>
+
+<!-- Agnieshka + Anne -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Agnieshka</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Wishing you the happiest of birthdays, dearest Anna.</p>
+      <p>May it mark not only time but a wonderful, expansive, and vibrant new chapter. May it be full of joy, freedom, vitality, and fulfilment. May it have more of what your heart desires.</p>
+      <p>I'm so glad we met and cultivated our little group from which our friendship grew. I look forward to it blossoming.</p>
+      <p><em>Love and hugs,<br>Anna M</em></p>
+    </div>
+  </div>
+</div>
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Anne</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Dear Anna,</p>
+      <p>True friends are very rare, very precious and one of the greatest blessings we can have. I treasure our friendship and feel blessed because of it.</p>
+      <p><em>With love,<br>Anne xxx</em></p>
+    </div>
+  </div>
+</div>
+
+<!-- England gallery -->
+<div class="gallery">
+  <div class="gallery-title">Souvenirs d'Angleterre</div>
+  <div class="gallery-author">— ricordi inglesi —</div>
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image10.jpg" data-zoom="photos/image10.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image48.jpg" data-zoom="photos/image48.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image27.jpg" data-zoom="photos/image27.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image16.jpg" data-zoom="photos/image16.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image45.jpg" data-zoom="photos/image45.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image19.jpg" data-zoom="photos/image19.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     FRANCE
+     ============================================================ -->
+<section class="country" id="france">
+  <div class="country-banner">
+    <div class="country-eyebrow">— capitolo secondo —</div>
+    <div class="country-name">FRANCIA</div>
+    <div class="country-flag">🇫🇷</div>
+  </div>
+</section>
+
+<!-- Delphine + Jo -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Delphine</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Joyeux anniversaire ma si précieuse Amie,</p>
+      <p>quelques moments passés joyeux et tellement d'autres à venir !</p>
+      <p style="margin-top: 16px;"><em>Baci Tesoro</em></p>
+    </div>
+  </div>
+</div>
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Jo</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Happy Birthday my gorgeous friend,</p>
+      <p>May you celebrate your 60th with all the happiness you deserve.</p>
+      <p>I'm filled with gratitude for our friendship — it means the world to me. You're smart, kind, fun-loving and you've always got my back.</p>
+      <p><em>Look forward to celebrating together soon in Paris.</em></p>
+    </div>
+  </div>
+</div>
+
+<div class="gallery">
+  <div class="gallery-title">Souvenirs partagés</div>
+  <div class="gallery-author">— France —</div>
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image2.jpg" data-zoom="photos/image2.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image49.jpg" data-zoom="photos/image49.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image13.jpg" data-zoom="photos/image13.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image20.jpg" data-zoom="photos/image20.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image37.jpg" data-zoom="photos/image37.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image36.jpg" data-zoom="photos/image36.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image31.jpg" data-zoom="photos/image31.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- Françoise -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Françoise</div>
+    <div class="message-rule"></div>
+    <div class="photo-arch" style="max-width: 580px;">
+      <img src="photos/image3.jpg" data-zoom="photos/image3.jpg" alt="Lettre manuscrite de Françoise">
+    </div>
+    <div class="photo-arch-caption">Tout a commencé là !</div>
+  </div>
+</div>
+
+<!-- Marie-Laure -->
+<div class="layout-split flip">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Marie-Laure</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Ma très chère Anne,</p>
+      <p>60 ans très bien portés et 30 ans d'amitié, ça se fête !</p>
+      <p>Je suis très heureuse d'avoir parcouru avec toi des moments parfois forts, et souvent drôles de ta vie.</p>
+      <p>Tout au long de ces années tu as fait des choix audacieux et tu as réussi à construire ton parcours singulier en accompagnant Mathias et Axel vers leur épanouissement.</p>
+      <p>J'ai hâte aussi de continuer à partager tous ces bons moments ensemble à discuter et à rigoler.</p>
+      <p><em>Je t'embrasse bien fort ✦</em></p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image41.jpg" data-zoom="photos/image41.jpg" alt="Marie-Laure & Anne">
+    </div>
+  </div>
+</div>
+
+<!-- Marie-Line -->
+<div class="layout-split">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Marie-Line</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Très joyeux anniversaire Anna,</p>
+      <p>bientôt 10 ans d'amitié qui à ton image s'est épanouie à travers le temps.</p>
+      <p>Je te souhaite une très belle nouvelle dizaine dans la Joie !</p>
+      <p><em>Marie-Line</em></p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image34.jpg" data-zoom="photos/image34.jpg" alt="Marie-Line">
+    </div>
+  </div>
+</div>
+
+<!-- Dorothé -->
+<div class="layout-split flip">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Dorothé</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Ma très chère Anna,</p>
+      <p>60 printemps, et pas une ride sur notre amitié.</p>
+      <p>Tu as ce don rare de rendre la vie plus légère et les moments plus vrais. Avec toi, les années ne passent pas, elles s'additionnent en souvenirs précieux.</p>
+      <p>Vieillir, finalement, c'est juste une autre façon de dire "vivre".</p>
+      <p>Tu incarnes la douceur, la gentillesse, l'écoute, la joie de vivre, la bienveillance et la fidélité.</p>
+      <p><em>Tes garçons te rendent tout l'amour que tu leur as donné en réalisant cet album souvenirs.</em></p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image42.jpg" data-zoom="photos/image42.jpg" alt="Dorothé & Anna">
+    </div>
+  </div>
+</div>
+
+<!-- Florence -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Florence</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Happy sixties dear Anna !</p>
+      <p>Je te souhaite une nouvelle décennie heureuse, sereine, avec de multiples projets… entre Londres, Paris ou l'Italie, qui sait...</p>
+      <p>À toi qui es un peu notre version à nous de Kristin Scott Thomas, entre élégance londonienne et esprit parisien — un très joyeux anniversaire, et surtout, restes comme tu es !</p>
+      <p><em>Je t'embrasse,<br>Florence</em></p>
+    </div>
+  </div>
+</div>
+<div class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image9.jpg" data-zoom="photos/image9.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image24.jpg" data-zoom="photos/image24.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image32.jpg" data-zoom="photos/image32.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- Marie-Hélène & Jacques -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Marie-Hélène &amp; Jacques</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Très chère Anna,</p>
+      <p>Une amitié coup de foudre est née entre nous il y a 17 ans, dans un lieu sublime au bout du monde, que nous n'oublierons jamais.</p>
+      <p>Plus qu'une amie — géniale (sic) — tu fais partie de notre famille, le lien que nous avons créé ne se rompra jamais !</p>
+      <p>Que ce soit à Londres, Paris, Bréti ou ailleurs, nous aurons toujours plaisir à te voir, pour de longues heures de "<em>chiacchierate</em>" très enjouées.</p>
+      <p>Te voici donc au seuil des 60 ans que tu portes merveilleusement bien, ton sourire rayonne, ton élégance inspire et ton savoir-vivre enchante !</p>
+      <p style="text-align:center;"><em>Bon anniversaire · Happy 60' · Tanti auguri</em></p>
+      <p><em>À presto !!!!<br>Marie-Hélène et Jacques</em></p>
+    </div>
+  </div>
+</div>
+<div class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image21.jpg" data-zoom="photos/image21.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image29.jpg" data-zoom="photos/image29.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image12.jpg" data-zoom="photos/image12.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- Alix & Alessandro -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Alix &amp; Alessandro</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Ma chère Anna,</p>
+      <p>plus de 20 ans que je te connais et ton amitié compte plus que jamais pour moi. Quand je suis rentrée dans la vie d'Alessandro, tu es une des rares amies avec qui je me suis sentie à l'aise.</p>
+      <p>Nous partagions des "valeurs fondamentales" : les enfants avant tout, le travail on s'en fout ! Toi et moi avons consacré toutes ces années à nos garçons. Et nous pouvons être fières : ils sont devenus des jeunes formidables.</p>
+      <p>Tu étais là pour partager les moments forts de mon existence : la naissance des garçons, mon mariage, des séjours dans le Perche et à Livorno.</p>
+      <p>Ces moments si précieux me font te retrouver comme si je t'avais vue la veille. Comme une sœur en sorte.</p>
+      <p><em>Je t'embrasse bien fort,<br>Alix</em></p>
+    </div>
+  </div>
+</div>
+<div class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image11.jpg" data-zoom="photos/image11.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image17.jpg" data-zoom="photos/image17.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image4.jpg" data-zoom="photos/image4.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     AUSTRALIA
+     ============================================================ -->
+<section class="country" id="australia">
+  <div class="country-banner">
+    <div class="country-eyebrow">— capitolo terzo —</div>
+    <div class="country-name">AUSTRALIA</div>
+    <div class="country-flag">🇦🇺</div>
+  </div>
+</section>
+
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Daniela &amp; Gilles</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Joyeux anniversaire chère Anna !</p>
+      <p>Tant de beaux moments partagés jusqu'ici et encore beaucoup à venir.</p>
+      <p style="text-align:center; font-size: 1.15em; margin: 16px 0;"><em>À 60 ans, la vie recommence !</em></p>
+      <p><em>Nous t'embrassons du fond du cœur,<br>Daniela et Gilles</em></p>
+    </div>
+  </div>
+</div>
+<div class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image23.jpg" data-zoom="photos/image23.jpg" alt=""></div>
+    <div class="gallery-photo"><img src="photos/image7.jpg" data-zoom="photos/image7.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     DENMARK
+     ============================================================ -->
+<section class="country" id="denmark">
+  <div class="country-banner">
+    <div class="country-eyebrow">— capitolo quarto —</div>
+    <div class="country-name">DANIMARCA</div>
+    <div class="country-flag">🇩🇰</div>
+  </div>
+</section>
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Mette</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p style="text-align:center; font-style: italic; color: var(--ink-soft); padding: 40px 0;">~ con tutto il suo amore, da Copenhagen ~</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ITALIA
+     ============================================================ -->
+<section class="country" id="italia">
+  <div class="country-banner">
+    <div class="country-eyebrow">— capitolo quinto —</div>
+    <div class="country-name">ITALIA</div>
+    <div class="country-flag">🇮🇹</div>
+  </div>
+</section>
+
+<!-- Lorenzo -->
+<div class="layout-split">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Lorenzo</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p style="font-style: italic; color: var(--terracotta-dark);">Estate 1978, Spagna, Las Cadenas.</p>
+      <p>Pomeriggio caldo, assolato, dentro una casa silenziosa, una ragazzina di dodici anni balla, da sola ; dopo, inaspettatamente, mi parla e racconta la sua grande passione per la danza.</p>
+      <p><em>Primo ricordo di Anna.</em></p>
+      <p>Da allora in poi, iniziamo a conoscerci e nasce una grande amicizia.</p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image44.jpg" data-zoom="photos/image44.jpg" alt="Lorenzo & Anna">
+    </div>
+    <div class="photo-arch-caption">Las Cadenas, 1978</div>
+  </div>
+</div>
+
+<!-- Elisabetta -->
+<div class="layout-split flip">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Elisabetta</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Annetta mia,</p>
+      <p>non sono riuscita a trovare le foto degli albori ma sappiamo che sei stata sempre presente nei momenti importanti e sempre lo sarai.</p>
+      <p style="text-align:center; font-size: 1.2em; margin-top: 30px;"><em>Buon compleanno tesora !</em></p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image6.jpg" data-zoom="photos/image6.jpg" alt="Elisabetta">
+    </div>
+  </div>
+</div>
+
+<!-- Grazia -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Grazia</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>60 ?! Non ci credo !</p>
+      <p>Per me sei ancora quella delle medie, che mi passava i bigliettini durante la lezione di matematica, con quella simpaticona della prof Minerva.</p>
+      <p>Ci siamo perse tra la Francia e i silenzi, ritrovate a Parigi come in un film, e da allora Firenze è diventata il nostro appuntamento fisso.</p>
+      <p>Ora fai la londinese ma sappiamo entrambe che il tuo cuore parla ancora toscano.</p>
+      <p>Auguri. Ai prossimi 60 di amicizia, ai prossimi viaggi per vederci.</p>
+      <p><em>Ti voglio bene,<br>Grazia</em></p>
+    </div>
+  </div>
+</div>
+<div class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-photo"><img src="photos/image46.jpg" data-zoom="photos/image46.jpg" alt=""><div class="cap">Firenze</div></div>
+    <div class="gallery-photo"><img src="photos/image18.jpg" data-zoom="photos/image18.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     USA
+     ============================================================ -->
+<section class="country" id="usa">
+  <div class="country-banner">
+    <div class="country-eyebrow">— capitolo sesto —</div>
+    <div class="country-name">AMERICA</div>
+    <div class="country-flag">🇺🇸</div>
+  </div>
+</section>
+
+<!-- Akiko -->
+<div class="layout-split">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Akiko</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p>Dear Anna,</p>
+      <p>This picture is how I always remember you — very caring but also being a strong mother. You always had plans to have fun with Mathias and Axel. And you made them laugh even when you were busy, and I admired you so much every time I spent time with you.</p>
+      <p>I am so lucky to get to know you over many years.</p>
+      <p style="text-align:center; font-size: 1.15em; margin-top: 16px;"><em>Happy Birthday, Anna !</em></p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image28.jpg" data-zoom="photos/image28.jpg" alt="Akiko">
+    </div>
+  </div>
+</div>
+
+<!-- Aika -->
+<div class="layout-split flip">
+  <div class="text-col">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Aika</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p style="text-align:center; font-size: 1.25em; padding: 20px 0;">Joyeux anniversaire Anna !</p>
+      <p style="text-align:center;"><em>Merci pour avoir été une tante merveilleuse.</em></p>
+    </div>
+  </div>
+  <div class="photo-col">
+    <div class="photo-arch">
+      <img src="photos/image30.jpg" data-zoom="photos/image30.jpg" alt="Aika">
+    </div>
+  </div>
+</div>
+
+<!-- Sebastian -->
+<div class="message">
+  <div class="message-card">
+    <div class="message-from">DA PARTE DI</div>
+    <div class="message-author">Sebastian</div>
+    <div class="message-rule"></div>
+    <div class="message-body">
+      <p style="font-style: italic; color: var(--terracotta-dark); text-align: center;">~ il fratellone ~</p>
+      <p>Buon compleanno, sorellina adorata !</p>
+      <p>Ho l'impressione che siamo come il buon vino : miglioriamo maturando. Certo, siamo sempre andati d'accordo, ma ho la sensazione che ci avviciniamo sempre di più e che il tempo trascorso insieme diventi ogni volta più memorabile.</p>
+      <p>Nonostante passino gli anni, sei sempre giovanissima !! Hai 5 anni meno di me !</p>
+      <p>Non solo non riesco a immaginare una sorella migliore, ma sei anche un'amica carissima, sempre pronta ad ascoltare e a dare ottimi consigli.</p>
+      <p>Il mondo è più bello perché ci sei tu. I tuoi amici sono persone incredibili e confermano il proverbio che dice : "<em>Dimmi con chi vai e ti dirò chi sei</em>".</p>
+      <p>Sono così contento che ora possiamo permetterci di viaggiare e vederci spesso di persona ; ma, grazie alla tecnologia attuale, siamo vicini ogni giorno.</p>
+      <p style="text-align:right; margin-top: 20px;"><em>Il fratellone</em></p>
+    </div>
+  </div>
+</div>
+
+<!-- Ricciuti family tree -->
+<section class="tree-section">
+  <h3>BIRCH · RICCIUTI</h3>
+  <div class="sub">l'albero genealogico</div>
+
+  <div class="florentine-tree">
+    <!-- Gen 1: Birch + Ricciuti -->
+    <div class="ftrow ft-gp">
+      <div class="ftcell">
+        <span class="ft-name">James Bruce Birch, MD</span>
+        <span class="ft-marry"><span class="ft-line"></span><span class="ft-heart">♥</span><span class="ft-line"></span></span>
+        <span class="ft-name">Katherine Summers Birch</span>
+      </div>
+      <div class="ftcell">
+        <span class="ft-name">Paul Ricciuti</span>
+        <span class="ft-marry"><span class="ft-line"></span><span class="ft-heart">♥</span><span class="ft-line"></span></span>
+        <span class="ft-name">Dorothy Larrica Ricciuti</span>
+      </div>
+    </div>
+
+    <!-- Stem from each couple -->
+    <div class="ftrow ft-anc-a">
+      <span class="ftcell stem" style="grid-column: 4;"></span>
+      <span class="ftcell stem" style="grid-column: 7;"></span>
+    </div>
+
+    <!-- Sibling bar over Birch siblings, drop to Paul -->
+    <div class="ftrow ft-anc-b">
+      <span class="ftcell leg" style="grid-column: 3;"></span>
+      <span class="ftcell bar" style="grid-column: 4;"></span>
+      <span class="ftcell leg" style="grid-column: 5;"></span>
+      <span class="ftcell leg" style="grid-column: 7;"></span>
+    </div>
+
+    <!-- Gen 2 names -->
+    <div class="ftrow">
+      <span class="ftcell" style="grid-column: 1;"><span class="ft-name">Collette</span></span>
+      <span class="ftcell" style="grid-column: 2;"><span class="ft-line"></span><span class="ft-heart">♥</span><span class="ft-line"></span></span>
+      <span class="ftcell" style="grid-column: 3;"><span class="ft-name">Tony Birch</span></span>
+      <span class="ftcell" style="grid-column: 4;"><span class="ft-line"></span></span>
+      <span class="ftcell" style="grid-column: 5;"><span class="ft-name">Katie Birch</span></span>
+      <span class="ftcell" style="grid-column: 6;"><span class="ft-line"></span><span class="ft-heart">♥</span><span class="ft-line"></span></span>
+      <span class="ftcell" style="grid-column: 7;"><span class="ft-name">Paul Ricciuti</span></span>
+    </div>
+
+    <!-- Drops to cousins -->
+    <div class="ftrow ft-desc">
+      <span class="ftcell drop" style="grid-column: 2;"></span>
+      <span class="ftcell drop" style="grid-column: 6;"></span>
+    </div>
+
+    <!-- Cousin bars -->
+    <div class="ftrow ft-cbar">
+      <span class="ftcell bar2" style="grid-column: 2;"></span>
+      <span class="ftcell bar3" style="grid-column: 6;"><span class="midstem"></span></span>
+    </div>
+
+    <!-- Cousins -->
+    <div class="ftrow ft-cousins">
+      <span class="ftcell" style="grid-column: 2;">
+        <div class="group2">
+          <div class="ft-cousin">
+            <span class="name">Sebastian</span>
+            <span class="sub">il fratellone</span>
+          </div>
+          <div class="ft-cousin anna">
+            <span class="name">Anna</span>
+            <span class="sub">LX · 2026</span>
+          </div>
+        </div>
+      </span>
+      <span class="ftcell" style="grid-column: 6;">
+        <div class="group3">
+          <div class="ft-cousin"><span class="name">Bruce</span><span class="sub">cousin</span></div>
+          <div class="ft-cousin"><span class="name">Katie</span><span class="sub">cousin</span></div>
+          <div class="ft-cousin"><span class="name">Kara</span><span class="sub">cousin</span></div>
+        </div>
+      </span>
+    </div>
+  </div>
+
+  <div class="message-body" style="margin-top: 50px; max-width: 720px; margin-left: auto; margin-right: auto; text-align: left;">
+    <p style="text-align: center; font-style: italic; color: var(--terracotta-dark); font-size: 1.1em;">A very Happy 60th Birthday to Anna Birch from her Ricciuti family in the United States.</p>
+    <p style="text-align: center; margin-bottom: 30px;">Uncle Paul · cousins Bruce Ricciuti and Kara Ricciuti Manchester · her late Aunt Katherine Birch Ricciuti · cousin Katherine Ricciuti Kline</p>
+    <p>The Ricciuti family is connected to the Birch family when Anna's father, James Anthony "Tony" Birch, met Paul James Ricciuti in college. Tony introduced Paul to his sister, Katie Birch — and they married in 1963, joining the two families.</p>
+    <p>The Birch &amp; Ricciuti children spent time in the late 1960s and early 1970s at Grandma Birch's home in Youngstown, Ohio. The family reunited in the 2000s — Bruce and Anna spent time together with family in Boston, and many emails followed with cousins.</p>
+    <p>Sebastian and family attended Paul's 90<sup>th</sup> birthday in 2025. And in September 2025, Anne and Paul met in London for High Tea, and Bruce and Anna also met in London.</p>
+    <p style="text-align: center; font-size: 1.1em; margin-top: 20px;"><em>We all hope to celebrate with you in person — hopefully in Paris or Florence !!!</em></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINALE
+     ============================================================ -->
+<section class="finale" id="finale">
+  <div class="finale-mark">— CODA —</div>
+  <h2>Tanti Auguri,<br>Mamma</h2>
+  <p>Per te, Maman, che hai dato tanto amore, tanta pazienza, tanta di te stessa —</p>
+  <p>un'ultima pagina solo per te. Aperta sul futuro, sulle risate a venire, sui viaggi, le conversazioni infinite, e tutti i capitoli che restano da scrivere.</p>
+
+  <div class="finale-quote">
+    « On ne vieillit pas en ayant vécu un certain nombre d'années,<br>on vieillit lorsqu'on déserte son idéal. »
+  </div>
+
+  <div class="finale-signature">
+    Buon compleanno, Mamma
+    <small>— con tutto il nostro amore — Mathias &amp; Axel</small>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  // Lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  document.addEventListener('click', (e) => {
+    const img = e.target.closest('img[data-zoom]');
+    if (img) {
+      lbImg.src = img.dataset.zoom;
+      lb.classList.add('open');
+    } else if (e.target.closest('.lightbox')) {
+      lb.classList.remove('open');
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') lb.classList.remove('open');
+  });
+
+  // Side nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.side-nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
