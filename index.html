@@ -3860,7 +3860,7 @@
       <p style="text-align:center;"><em>Merci pour avoir été une tante merveilleuse.</em></p>
     `, 'image30.jpg', '', true),
 
-    msg('Sebastian', `
+    msgWithGallery('Sebastian', `
       <p style="font-style:italic; color: var(--gold-deep); text-align:center;">~ il fratellone ~</p>
       <p>Buon compleanno, sorellina adorata !</p>
       <p>Ho l'impressione che siamo come il buon vino : miglioriamo maturando. Certo, siamo sempre andati d'accordo, ma ho la sensazione che ci avviciniamo sempre di più e che il tempo trascorso insieme diventi ogni volta più memorabile.</p>
@@ -3869,7 +3869,12 @@
       <p>Il mondo è più bello perché ci sei tu. I tuoi amici sono persone incredibili e confermano il proverbio che dice : "<em>Dimmi con chi vai e ti dirò chi sei</em>".</p>
       <p>Sono così contento che ora possiamo permetterci di viaggiare e vederci spesso di persona ; ma, grazie alla tecnologia attuale, siamo vicini ogni giorno.</p>
       <p style="text-align:right; margin-top: 20px;"><em>Il fratellone</em></p>
-    `),
+    `, [
+      { src: 'extra-image7.jpg' },
+      { src: 'extra-image1.jpg' },
+      { src: 'extra-image2.jpg' },
+      { src: 'extra-image8.jpg' },
+    ]),
 
     // RICCIUTI FAMILY
     {
@@ -4019,6 +4024,40 @@
         </div>
       `
     },
+
+    // Bruce & Paul gallery — closing the USA section
+    {
+      type: 'message',
+      author: 'Bruce & Paul',
+      html: `
+        <div class="paper">
+          <div class="message-from">de la part de</div>
+          <div class="message-author">Bruce &amp; Paul</div>
+          <div class="message-decor">✦ ─────── ✦</div>
+          <div class="gallery-grid" style="max-width: 820px; margin-top: 20px;">
+            ${photoCard('extra-image5.jpg')}
+            ${photoCard('extra-image3.jpg')}
+          </div>
+        </div>
+      `
+    },
+
+    // ============================================================
+    // MATHIAS — closing message from her son
+    // ============================================================
+    msgWithPhotoRow('Mathias', `
+      <p style="font-style:italic; color: var(--gold-deep); text-align:center;">~ ton fils ~</p>
+      <p>Quand j'étais vers la fin de Exeter, je me demandais comment ça allait être de retourner vivre à la maison après l'université. Au final, c'est juste une expérience incroyable et la possibilité de vivre surtout avec une personne incroyable.</p>
+      <p>Ton soutien, ta bonne humeur et juste toi-même en tant que maman, me donne beaucoup de force chaque jour : merci beaucoup pour juste être la personne que tu es. Une maman amusante et incroyablement généreuse.</p>
+      <p>Des souvenirs ? J'en ai plein qui resteront gravés toujours dans ma mémoire mais il y en a un en particulier qui me tient à cœur. <em>It might be "small" but super valuable :</em> le fait que tu te déplaces récemment beaucoup sur mes courses et tu viens me soutenir. Te voir sur la ligne d'arrivée me donne à chaque fois tellement de force et c'est un soutien qui me tient tellement à cœur.</p>
+      <p style="text-align:center;"><em>Vraiment merci merci !!</em></p>
+      <p>Aujourd'hui, c'est le jour de fêter ton anniversaire. 60 ans ? Hahaha, laisse moi rire : enlève-moi 20 ans et c'est ça ton véritable âge.</p>
+      <p>À travers ce projet, on a voulu se réunir avec Axellito pour célébrer cette journée spéciale avec toi mais aussi avec toutes les personnes qui t'aiment et t'apprécient : ta famille, tes amis et tes collègues. Tous ensemble, ils sont ici dans ce projet pour te montrer que tu n'es pas toute seule et que tu es énormément aimée et appréciée à travers le monde.</p>
+      <p style="text-align:center; font-size: 1.15em; margin-top: 20px;"><em>Joyeux anniversaire maman adorée !<br>Je t'aime beaucoup !!</em></p>
+    `, [
+      { src: 'extra-image6.jpg', cap: 'la ligne d\'arrivée' },
+      { src: 'extra-image4.jpg', cap: '' },
+    ]),
 
     // ============================================================
     // FINAL
