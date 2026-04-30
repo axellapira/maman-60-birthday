@@ -3522,22 +3522,6 @@
       `
     },
 
-    // ========== INTRO ==========
-    {
-      type: 'intro',
-      html: `
-        <div class="paper">
-          <div class="intro-mark">~</div>
-          <h2>À Maman</h2>
-          <p>Soixante années. Soixante printemps de rires, de voyages, de tendresse et de courage.</p>
-          <p>Pour célébrer cette page magnifique de ta vie, nous avons recueilli les mots de celles et ceux qui t'aiment, dispersés à travers le monde — de Londres à Florence, de Paris à Sydney, de New York à Copenhague.</p>
-          <p>Chaque page est un baiser, une étreinte, une déclaration. Une mosaïque d'amitiés et d'amour qui dessine la femme extraordinaire que tu es.</p>
-          <p style="margin-top: 24px;"><em>Avec tout notre amour,<br>Mathias & Axel</em></p>
-          <div class="ornament" style="margin-top: 30px;">✿ ❦ ✿</div>
-        </div>
-      `
-    },
-
     // ============================================================
     // ENGLAND
     // ============================================================
@@ -3805,18 +3789,20 @@
     ]),
 
     // ============================================================
-    // DANEMARK
+    // DANEMARK — hidden until Mette's message arrives
     // ============================================================
+    /*
     { type: 'country', section: 'Danemark', html: countryHTML('IV', 'DNK · København', 'Danemark', 'amitiés du Nord') },
 
     msg('Mette', `
       <p style="text-align:center; font-style:italic; color: var(--ink-faded); padding: 40px 0;">~ avec tout son amour, depuis Copenhague ~</p>
     `),
+    */
 
     // ============================================================
     // ITALIA
     // ============================================================
-    { type: 'country', section: 'Italia', html: countryHTML('V', 'ITA · Firenze', 'Italia', 'le cœur toscan') },
+    { type: 'country', section: 'Italia', html: countryHTML('IV', 'ITA · Firenze', 'Italia', 'le cœur toscan') },
 
     msgPhotoSplit('Lorenzo', `
       <p style="font-style:italic; color: var(--gold-deep);">Estate 1978, Spagna, Las Cadenas.</p>
@@ -3846,7 +3832,7 @@
     // ============================================================
     // USA
     // ============================================================
-    { type: 'country', section: 'USA', html: countryHTML('VI', 'USA · Ohio', 'USA', 'family across the ocean') },
+    { type: 'country', section: 'USA', html: countryHTML('V', 'USA · Ohio', 'USA', 'family across the ocean') },
 
     msgPhotoSplit('Akiko', `
       <p>Dear Anna,</p>
@@ -4060,23 +4046,35 @@
     ]),
 
     // ============================================================
+    // AXEL — closing message from her younger son
+    // ============================================================
+    msgWithGallery('Axel', `
+      <p style="font-style:italic; color: var(--gold-deep); text-align:center;">~ ton fils ~</p>
+      <p>Dear Maman,</p>
+      <p>Happy 60th birthday !</p>
+      <p>I should've probably made a comic like when you turned 50 about <em>super vieille</em> but write the sequel. Sadly you don't even look that old. Maybe for your 70th.</p>
+      <p>You've given me so much and you're the single most responsible person for my happiness and where I currently am, so thank you <em>du fond du cœur</em>.</p>
+      <p>Beyond what you've done for me and your devotion as a mother to both Mathias and I, you are a truly incredible person — smart (both emotionally and intellectually !), kind and humble.</p>
+      <p style="text-align:center; font-size: 1.1em; margin-top: 16px;"><em>I am really proud to call you my mum.</em></p>
+      <p style="margin-top: 20px;"><em>Lots and lots of love,<br>Axel</em></p>
+    `, [
+      { src: 'axel-image2.jpg' },
+      { src: 'axel-image4.jpg' },
+      { src: 'axel-image1.jpg' },
+      { src: 'axel-image3.jpg' },
+    ]),
+
+    // ============================================================
     // FINAL
     // ============================================================
     {
       type: 'surprise',
       html: `
         <div class="paper">
-          <div class="ornament">❦ ✦ ❦</div>
-          <h2>Et pour finir…</h2>
-          <p>Pour toi, Maman, qui as donné tant d'amour, tant de patience, tant de toi-même —</p>
-          <p>une dernière page rien qu'à toi. Ouverte sur l'avenir, sur les rires à venir, sur les voyages, les conversations sans fin, et tous les chapitres qui restent à écrire.</p>
-          <div class="heart">♥</div>
-          <p style="font-size: 1.05em;"><em>« On ne vieillit pas en ayant vécu un certain nombre d'années,<br>on vieillit lorsqu'on déserte son idéal. »</em></p>
-          <div class="signature">
+          <div class="signature" style="margin-top: 0;">
             Joyeux 60 ans, Maman
-            <small>— avec tout notre amour — Mathias &amp; Axel</small>
+            <small>— Mathias &amp; Axel —</small>
           </div>
-          <div class="ornament" style="margin-top: 30px;">❦ ✦ ❦</div>
         </div>
       `
     },
