@@ -645,6 +645,57 @@
   .message-body em { color: var(--ink-soft); }
   .message-body strong { font-weight: 500; color: var(--gold-deep); }
 
+  /* Talmudic quote — Alessandro's contribution, set apart visually */
+  .talmud-quote {
+    margin: 32px 0 8px;
+    padding: 24px 28px;
+    background:
+      linear-gradient(180deg, rgba(255, 250, 235, 0.7) 0%, rgba(247, 238, 220, 0.5) 100%);
+    border-left: 3px solid var(--terracotta);
+    border-right: 1px solid rgba(184, 85, 58, 0.2);
+    box-shadow: 0 2px 8px rgba(43, 36, 28, 0.05);
+    font-family: 'EB Garamond', 'Cormorant Garamond', serif;
+    font-size: clamp(13px, 1.25vw, 15px);
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .talmud-quote p {
+    margin-bottom: 10px;
+    text-align: justify;
+  }
+  .talmud-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    text-align: center;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .talmud-ref {
+    font-style: italic;
+    color: var(--terracotta);
+    font-size: 0.9em;
+  }
+  .talmud-cite {
+    text-align: right;
+    font-style: italic;
+    color: var(--ink-faded);
+    font-size: 0.85em;
+    margin: 14px 0 18px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(184, 85, 58, 0.3);
+  }
+  .talmud-postscript {
+    font-style: italic;
+    text-align: center !important;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(184, 85, 58, 0.2);
+  }
+
   /* SIDE-BY-SIDE: text on one side, photo on the other */
   .layout-split {
     display: grid;
@@ -3560,7 +3611,7 @@
 
     msgWithPhotoRow('Luciana', `
       <p>Cara Anna,</p>
-      <p>le foto ci ricordano momenti felici ma in tutti questi anni tu ci sei sempre stata, anche in quelli difficili.</p>
+      <p>Le foto ci ricordano momenti felici ma in tutti questi anni tu ci sei sempre stata, anche in quelli difficili.</p>
       <p>Con la speranza di innumerevoli momenti meravigliosi ti auguro un</p>
       <p style="text-align:center; font-size:1.15em;"><em>Buon 30×2 compleanno my lovely friend ♥</em></p>
       <p>So happy to have you in my life.</p>
@@ -3572,7 +3623,7 @@
 
     msgWithPhotoRow('Giovanna', `
       <p>Cara Anna,</p>
-      <p>oggi festeggi un traguardo importante. Ti auguro di poterlo fare circondata dall'affetto della tua famiglia e dei tuoi amici più cari.</p>
+      <p>Oggi festeggi un traguardo importante. Ti auguro di poterlo fare circondata dall'affetto della tua famiglia e dei tuoi amici più cari.</p>
       <p>Spero che i tuoi sogni abbiano trovato voce… ti auguro di celebrare questo momento con il cuore pieno di gioia e che la vita ti riservi ancora tante cose belle.</p>
       <p><em>Un grande abbraccio,<br>Gio</em></p>
     `, [
@@ -3592,7 +3643,7 @@
 
     msgWithPhotoRow('Francesca', `
       <p>Cara Anna,</p>
-      <p>anche se ci siamo conosciute in una fase matura della nostra vita, il tempo trascorso insieme a Londra ha fatto sbocciare una bellissima amicizia tra noi che, nonostante la lontananza, sento molto forte e mi auguro che duri per tanto altro tempo ancora.</p>
+      <p>Anche se ci siamo conosciute in una fase matura della nostra vita, il tempo trascorso insieme a Londra ha fatto sbocciare una bellissima amicizia tra noi che, nonostante la lontananza, sento molto forte e mi auguro che duri per tanto altro tempo ancora.</p>
       <p>Mi sei stata vicina in uno dei momenti più brutti della mia vita e non ti sarò mai abbastanza riconoscente per il tuo sostegno durante le lunghe chiacchierate mattutine post palestra davanti al nostro cappuccino su Northcote Road.</p>
       <p>Ammiro la tua lealtà, la tua capacità di ascoltare e soprattutto la forza di volontà con cui ti sei "reinventata", rimettendoti a studiare alla ricerca della "nuova" Anna.</p>
       <p>Mi auguro che questo importante compleanno rappresenti l'inizio di una vita serena e felice in compagnia delle persone che ti vogliono bene.</p>
@@ -3600,6 +3651,7 @@
     `, [
       { src: 'image15.jpg' },
       { src: 'image22.jpg', cap: '' },
+      { src: 'image47.jpg', cap: '' },
     ]),
 
     msg('David', `
@@ -3612,7 +3664,7 @@
     multiMsg([
       { author: 'Gabriella', body: `
         <p>Dearest Anna,</p>
-        <p>firstly I cannot put into words how important and how integral you have been to my life, despite meeting only a few years ago. Your utter unconditional love of your friends and selflessness is something that I admire so much.</p>
+        <p>Firstly I cannot put into words how important and how integral you have been to my life, despite meeting only a few years ago. Your utter unconditional love of your friends and selflessness is something that I admire so much.</p>
         <p>You adore your two gorgeous boys and they are the epicentre of your world. But also you raised two brilliant kids who are a testimony to you. I love our friendship more than anything and so incredibly grateful to have you in my life.</p>
         <p>Remember the ring chat ? You will be there when it eventually happens and that means everything to me. You are truly a wonderful and incredibly inspiring woman and somebody I will always admire and adore xx</p>
         <p><em>love Gaby</em></p>
@@ -3762,13 +3814,21 @@
 
     msgWithGallery('Alix & Alessandro', `
       <p>Ma chère Anna,</p>
-      <p>plus de 20 ans que je te connais et ton amitié compte plus que jamais pour moi. Quand je suis rentrée dans la vie d'Alessandro, tu es une des rares amies avec qui je me suis sentie à l'aise.</p>
+      <p>Plus de 20 ans que je te connais et ton amitié compte plus que jamais pour moi. Quand je suis rentrée dans la vie d'Alessandro, tu es une des rares amies avec qui je me suis sentie à l'aise.</p>
       <p>Nous partagions des "valeurs fondamentales" : les enfants avant tout, le travail on s'en fout ! Toi et moi avons consacré toutes ces années à nos garçons, voulant le meilleur pour eux. Et nous pouvons être fières : ils sont devenus des jeunes formidables.</p>
       <p>Tu étais là pour partager les moments forts de mon existence : la naissance des garçons, mon mariage, des séjours dans le Perche et à Livorno.</p>
       <p>Même si nous n'échangeons pas pendant plusieurs mois, ces moments si précieux me font te retrouver comme si je t'avais vue la veille. Comme une sœur en sorte.</p>
       <p><em>Je t'embrasse bien fort,<br>Alix</em></p>
+
+      <blockquote class="talmud-quote">
+        <div class="talmud-eyebrow">— et de la part d'Alessandro —</div>
+        <p>« Gli Israeliti partirono da Ramses alla volta di Succot, in numero di seicentomila uomini capaci di camminare, senza contare i bambini. » <span class="talmud-ref">(Esodo 12:37)</span></p>
+        <p>Disse Rabbi Nathan : da dove si deduce che il numero <strong>60</strong> è alla base della felicità ? Dal versetto Esodo 12:37 : gli Israeliti erano <em>sessanta volte diecimila</em>, e marciavano verso la Terra Promessa.</p>
+        <p>Gli altri Saggi danno una ragione diversa : 6 riunisce in sé la stabilità e lo slancio, 10 sono i comandamenti che Dio ha dato a Israele e al mondo, fondamento di tutto.</p>
+        <div class="talmud-cite">— Talmud di Livorno, trattato "Auguri", folio 2026</div>
+        <p class="talmud-postscript">All'amica degli ultimi venticinque anni e (almeno) per i prossimi venticinque, con affetto immutato.</p>
+      </blockquote>
     `, [
-      { src: 'image11.jpg' },
       { src: 'image17.jpg' },
       { src: 'image4.jpg' },
     ]),
@@ -3802,7 +3862,7 @@
     // ============================================================
     // ITALIA
     // ============================================================
-    { type: 'country', section: 'Italia', html: countryHTML('V', 'ITA · Firenze', 'Italia', 'le cœur toscan') },
+    { type: 'country', section: 'Italia', html: countryHTML('V', 'ITA · Firenze', 'Italia', 'retour en enfance') },
 
     msgPhotoSplit('Lorenzo', `
       <p style="font-style:italic; color: var(--gold-deep);">Estate 1978, Spagna, Las Cadenas.</p>
@@ -3813,7 +3873,7 @@
 
     msgPhotoSplit('Elisabetta', `
       <p>Annetta mia,</p>
-      <p>non sono riuscita a trovare le foto degli albori ma sappiamo che sei stata sempre presente nei momenti importanti e sempre lo sarai.</p>
+      <p>Non sono riuscita a trovare le foto degli albori ma sappiamo che sei stata sempre presente nei momenti importanti e sempre lo sarai.</p>
       <p style="text-align:center; font-size:1.15em; margin-top: 20px;"><em>Buon compleanno tesora !</em></p>
     `, 'image6.jpg', '', true),
 
